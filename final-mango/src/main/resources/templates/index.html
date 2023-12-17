@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body><!--preloading-->
+	<div id="preloader"><img class="logo" src="images/mango_logo2.png" alt="" width="119" height="58">
+		<div id="status"><span></span><span></span></div>
+	</div><!--end of preloading--><!--login form popup-->
+	<!-- <div class="login-wrapper" id="signup-content">
+		<div class="login-content">
+			<a href="#" class="close">x</a>
+			<h3>Login</h3>
+			<form method="post" action="user_login_action">
+				<div class="row">
+					<label for="userId">UserId:<input type="text" name="userId" id="userId" placeholder="아이디"
+							pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" /></label>
+				</div>
+				<div class="row">
+					<label for="password"> Password:<input type="password" name="password" id="password"
+							placeholder="비밀번호" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" /></label>
+				</div>
+				<div class="row">
+					<div class="remember">
+						<a href="user_write_form">회원가입하기</a>
+					</div>
+					<div class="remember">
+
+						<a href="userCheckIdPw">아이디찾기 / 비밀번호찾기</a>
+					</div>
+				</div>
+				<div class="row">
+					<button type="submit" id="login-button">Login</button>
+				</div>
+			</form>
+			<div class="row">
+				<p>Or via social</p>
+				<div class="social-btn-2">
+					<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
+					<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div> -->
+	<!--end of login form popup-->
+	<!-- BEGIN | Header -->
+	<header class="ht-header">
+		<div class="container">
+
+
+			<div th:insert="~{common_menu :: menuFragment}"></div>
+
+			<!-- 검색창 주석처리 완
+				<div class="top-search"><select>
+					<option value="united">노래검색</option>
+					<option value="saab">가수검색</option>
+				</select><input type="text" placeholder="Please search for music or artist"></div>-->
+		</div>
+	</header><!-- END | Header -->
+	<div class="slider movie-items" style="
+    padding-top: 120px;
+">
+		<div class="container">
+			<div class="row">
+
+				<div class="slick-multiItemSlider">
+					<div class="movie-item">
+						<div class="mv-img"><a href="#"><img src="images/uploads/slider1.jpg" alt="" width="285"
+									height="437"></a></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=133">Either Way</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><a href="#"><img src="images/uploads/slider2.jpg" alt="" width="285"
+									height="437"></a></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=41">Super Shy</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><a href="#"><img src="images/uploads/slider3.jpg" alt="" width="285"
+									height="437"></a></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=40">Seven</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><a href="#"><img src="images/uploads/slider4.jpg" alt="" width="285"
+									height="437"></a></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=83">아이와 나의 바다</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><a href="#"><img src="images/uploads/slider5.jpg" alt="" width="285"
+									height="437"></a></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=36">Dynamite</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><a href="#"><img src="images/uploads/slider6.jpg" alt="" width="285"
+									height="437"></a></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=51">Unforgiven</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><img src="images/uploads/slider7.jpg" alt="" width="285" height="437"></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=81">Spicy</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><img src="images/uploads/slider8.jpg" alt="" width="285" height="437"></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=24">Love Lee</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><img src="images/uploads/slider9.jpg" alt="" width="285" height="437"></div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=82">Get a Guitar</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><img src="images/uploads/slider10.jpg" alt="" width="285" height="437">
+						</div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=130">You & Me</a></h6>
+						</div>
+					</div>
+					<div class="movie-item">
+						<div class="mv-img"><img src="images/uploads/slider11.jpeg" alt="" width="285" height="437">
+						</div>
+						<div class="title-in">
+							<h6><a href="product_music_detail?productNo=43">너의 모든 순간</a></h6>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="movie-items">
+		<div class="container">
+			<div class="row ipad-width">
+				<div class="col-md-8">
+					<div class="title-hd">
+						<h2>MANGO TICKET</h2><a href="product_ticket_list" class="viewall">View More <i
+								class="ion-ios-arrow-right"></i></a>
+					</div>
+					<div class="tabs">
+						<div class="tab-content">
+							<div id="tab1" class="tab active">
+								<div class="row">
+									<div class="slick-multiItem">
+
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img"><img th:src="${tickets[0].productImage}" alt=""
+														width="185" height="284"></div>
+												<div class="hvr-inner"><a
+														th:href="@{/product_ticket_detail(productNo=${tickets[0].productNo})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a></div>
+												<div class="title-in">
+													<h6><a th:href="@{/product_ticket_detail(productNo=${tickets[0].productNo})}"
+															th:text="${tickets[0].productName}">JPOP 콘서트</a>
+													</h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img"><img th:src="${tickets[1].productImage}" alt=""
+														width="185" height="284"></div>
+												<div class="hvr-inner"><a
+														th:href="@{/product_ticket_detail(productNo=${tickets[1].productNo})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a></div>
+												<div class="title-in">
+													<h6><a th:href="@{/product_ticket_detail(productNo=${tickets[1].productNo})}"
+															th:text="${tickets[1].productName}">JPOP 콘서트</a>
+													</h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img"><img th:src="${tickets[2].productImage}" alt=""
+														width="185" height="284"></div>
+												<div class="hvr-inner"><a
+														th:href="@{/product_ticket_detail(productNo=${tickets[2].productNo})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a></div>
+												<div class="title-in">
+													<h6><a th:href="@{/product_ticket_detail(productNo=${tickets[2].productNo})}"
+															th:text="${tickets[2].productName}">JPOP 콘서트</a>
+													</h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img"><img th:src="${tickets[3].productImage}" alt=""
+														width="185" height="284"></div>
+												<div class="hvr-inner"><a
+														th:href="@{/product_ticket_detail(productNo=${tickets[3].productNo})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a></div>
+												<div class="title-in">
+													<h6><a th:href="@{/product_ticket_detail(productNo=${tickets[3].productNo})}"
+															th:text="${tickets[3].productName}">JPOP 콘서트</a>
+													</h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img"><img th:src="${tickets[4].productImage}" alt=""
+														width="185" height="284"></div>
+												<div class="hvr-inner"><a
+														th:href="@{/product_ticket_detail(productNo=${tickets[4].productNo})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a></div>
+												<div class="title-in">
+													<h6><a th:href="@{/product_ticket_detail(productNo=${tickets[4].productNo})}"
+															th:text="${tickets[4].productName}">JPOP 콘서트</a>
+													</h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img"><img th:src="${tickets[5].productImage}" alt=""
+														width="185" height="284"></div>
+												<div class="hvr-inner"><a
+														th:href="@{/product_ticket_detail(productNo=${tickets[5].productNo})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a></div>
+												<div class="title-in">
+													<h6><a th:href="@{/product_ticket_detail(productNo=${tickets[5].productNo})}"
+															th:text="${tickets[5].productName}">JPOP 콘서트</a>
+													</h6>
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="title-hd">
+						<h2>MANGO MAGAZINE </h2><a href="board_magazine" class="viewall">View More <i
+								class="ion-ios-arrow-right"></i></a>
+					</div>
+					<div class="tabs">
+						<div class="tab-content">
+							<div id="tab22" class="tab active">
+								<div class="row">
+									<div class="slick-multiItem">
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img th:src="@{${magazines[0].boardPrize}}" alt=""
+														style="width: 166px; height: 199px;">
+												</div>
+												<div class="hvr-inner">
+													<a
+														th:href="@{/board_other_detail(boardId=${magazines[0].boardId})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a>
+												</div>
+												<div class="title-in">
+													<h6><a href="#"
+															th:text="${magazines[0].boardTitle}">Interstellar</a></h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img th:src="@{${magazines[1].boardPrize}}" alt=""
+														style="width: 166px; height: 199px;">
+												</div>
+												<div class="hvr-inner">
+													<a
+														th:href="@{/board_other_detail(boardId=${magazines[1].boardId})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a>
+												</div>
+												<div class="title-in">
+													<h6><a href="#"
+															th:text="${magazines[1].boardTitle}">Interstellar</a></h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img th:src="@{${magazines[2].boardPrize}}" alt=""
+														style="width: 166px; height: 199px;">
+												</div>
+												<div class="hvr-inner">
+													<a
+														th:href="@{/board_other_detail(boardId=${magazines[2].boardId})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a>
+												</div>
+												<div class="title-in">
+													<h6><a href="#"
+															th:text="${magazines[2].boardTitle}">Interstellar</a></h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img th:src="@{${magazines[3].boardPrize}}" alt=""
+														style="width: 166px; height: 199px;">
+												</div>
+												<div class="hvr-inner">
+													<a
+														th:href="@{/board_other_detail(boardId=${magazines[3].boardId})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a>
+												</div>
+												<div class="title-in">
+													<h6><a href="#"
+															th:text="${magazines[3].boardTitle}">Interstellar</a></h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img th:src="@{${magazines[4].boardPrize}}" alt=""
+														style="width: 166px; height: 199px;">
+												</div>
+												<div class="hvr-inner">
+													<a
+														th:href="@{/board_other_detail(boardId=${magazines[4].boardId})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a>
+												</div>
+												<div class="title-in">
+													<h6><a href="#"
+															th:text="${magazines[4].boardTitle}">Interstellar</a></h6>
+												</div>
+											</div>
+										</div>
+										<div class="slide-it">
+											<div class="movie-item">
+												<div class="mv-img">
+													<img th:src="@{${magazines[5].boardPrize}}" alt=""
+														style="width: 166px; height: 199px;">
+												</div>
+												<div class="hvr-inner">
+													<a
+														th:href="@{/board_other_detail(boardId=${magazines[5].boardId})}">Read
+														more <i class="ion-android-arrow-dropright"></i></a>
+												</div>
+												<div class="title-in">
+													<h6><a href="#"
+															th:text="${magazines[5].boardTitle}">Interstellar</a></h6>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="sidebar">
+						<div class="ads">
+							<p>🎦 RedVelvet ComeBack 🎧</p>
+							<a href="product_music_detail?productNo=123">
+							<img src="images/rv.jpg" alt=""></a>
+						</div>
+						<div class="celebrities">
+							<h4 class="sb-title">MANGO CHART</h4>
+							<div class="celeb-item"><a
+									th:href="@{/product_music_detail(productNo=${musics[0].productNo})}"><img
+										th:src="${musics[0].productImage}" alt="" width="70" height="70"></a>
+								<div class="celeb-author">
+									<h6><a href="#" th:text="${musics[0].productName}">1 . Celebrity</a></h6>
+									<span th:text="${musics[0].productArtist}">아이유(IU)</span>
+								</div>
+							</div>
+							<div class="celeb-item"><a
+									th:href="@{/product_music_detail(productNo=${musics[1].productNo})}"><img
+										th:src="${musics[1].productImage}" alt="" width="70" height="70"></a>
+								<div class="celeb-author">
+									<h6><a href="#" th:text="${musics[1].productName}">2 . You & Me</a></h6>
+									<span th:text="${musics[1].productArtist}">제니</span>
+								</div>
+							</div>
+							<div class="celeb-item"><a
+									th:href="@{/product_music_detail(productNo=${musics[2].productNo})}"><img
+										th:src="${musics[2].productImage}" alt="" width="70" height="70"></a>
+								<div class="celeb-author">
+									<h6><a href="#" th:text="${musics[2].productName}">3 . LoveLee</a></h6>
+									<span th:text="${musics[2].productArtist}">악동뮤지션</span>
+								</div>
+							</div>
+							<div class="celeb-item"><a
+									th:href="@{/product_music_detail(productNo=${musics[3].productNo})}"><img
+										th:src="${musics[3].productImage}" alt="" width="70" height="70"></a>
+								<div class="celeb-author">
+									<h6><a href="#" th:text="${musics[3].productName}">4 . Seven</a></h6>
+									<span th:text="${musics[3].productArtist}">정국</span>
+								</div>
+							</div><a href="product_music_list" class="btn">VIEW MORE<i
+									class="ion-ios-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="trailers">
+		<div class="container">
+			<div class="row ipad-width">
+				<div class="col-md-12">
+					<div class="title-hd">
+						<h2>최신음악 MV</h2><a href="product_music_newest" class="viewall">View More <i
+								class="ion-ios-arrow-right"></i></a>
+					</div>
+					<div class="videos">
+						<div class="slider-for-2 video-ft">
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/EIz09kLzN9k"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/1QYBiNRu1ok"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/_Hu4GYtye5U"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/ArmDp-zijuc"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/eQNHDV7lKgE"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/0-q1KafFCLU"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/j2aQ_NqeTNw"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/jO2viLEW-1A?list=RDjO2viLEW-1A"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/uQiF1yOnzDg"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/c_10qS7amjk"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/DwuJeGYlYyw"></iframe></div>
+							<div><iframe class="item-video" src=""
+									data-src="https://www.youtube.com/embed/fvjpE_wFL5A"></iframe></div>
+						</div>
+						<div class="slider-nav-2 thumb-ft">
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/악뮤.jpg" alt="photo by Barn Images"
+										width="4096" height="2737"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">Love Lee</h4>
+									<p>AKMU</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/정국.png" alt="photo by Barn Images"
+										width="350" height="200"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">Seven</h4>
+									<p>정국(Jung Kook) feat. Latto</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/아이브.jpg" alt="photo by Joshua Earle">
+								</div>
+								<div class="trailer-infor">
+									<h4 class="desc">Either Way</h4>
+									<p>IVE 아이브</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/뉴진스.jpg"
+										alt="photo by Alexander Dimitrov" width="100" height="56"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">Super Shy</h4>
+									<p>New Jeans</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/제니.jpg"
+										alt="photo by Wojciech Szaturski" width="100" height="56"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">You & Me DANCE PERFORMANCE VIDEO</h4>
+									<p>JENNIE</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/아이유.jpg"
+										alt="photo by Wojciech Szaturski" width="360" height="189"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">Celebrity</h4>
+									<p>IU_(아이유)</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/디오.png"
+										alt="photo by Wojciech Szaturski" width="360" height="189"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">괜찮아도 괜찮아</h4>
+									<p>D.O. 디오</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/제레미주커.jpeg"
+										alt="photo by Wojciech Szaturski" width="360" height="189"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">comethru</h4>
+									<p>Jeremy Zucker</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/드루브.jpeg"
+										alt="photo by Wojciech Szaturski" width="360" height="189"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">double take</h4>
+									<p>dhruv</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/라우브&라니.jpeg"
+										alt="photo by Wojciech Szaturski" width="360" height="189"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">Mean It</h4>
+									<p>Lauv & LANY</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/엘리멘탈.jpeg"
+										alt="photo by Wojciech Szaturski" width="360" height="189"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">Steal The Show</h4>
+									<p>Lauv</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="trailer-img"><img src="images/uploads/라우브&트로이시반.jpeg"
+										alt="photo by Wojciech Szaturski" width="360" height="189"></div>
+								<div class="trailer-infor">
+									<h4 class="desc">i'm so tired...</h4>
+									<p>Lauv & Troye Sivan</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- latest new v1 section-->
+
+	</div><!--end of latest new v1 section--><!-- footer section-->
+	<footer class="ht-footer">
+		<div class="container">
+			<div class="flex-parent-ft">
+				<div class="flex-child-ft item1"><a href="index.html"><img class="logo" src="images/mango_logo2.png"
+							alt="" width="119" height="58"></a>
+					<p>129, Teheran-ro, Gangnam-gu,<br> Seoul, Republic of Korea</p>
+					<p>Call us: <a href="#">(+82) 02 6255 8002</a></p>
+				</div>
+				<div class="flex-child-ft item2">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Blockbuster</a></li>
+						<li><a href="#">Contact Us</a></li>
+						<li><a href="#">Forums</a></li>
+						<li><a href="#">Blog</a></li>
+						<li><a href="#">Help Center</a></li>
+					</ul>
+				</div>
+				<div class="flex-child-ft item3">
+					<h4>Legal</h4>
+					<ul>
+						<li><a href="#">Terms of Use</a></li>
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="#">Security</a></li>
+					</ul>
+				</div>
+				<div class="flex-child-ft item4">
+					<h4>Account</h4>
+					<ul>
+						<li><a href="#">My Account</a></li>
+						<li><a href="#">Watchlist</a></li>
+						<li><a href="#">Collections</a></li>
+						<li><a href="#">User Guide</a></li>
+					</ul>
+				</div>
+				<div class="flex-child-ft item5">
+					<h4>Newsletter</h4>
+					<p>Subscribe to our newsletter system now <br>to get latest news from us.</p>
+					<form action="#"><input type="text" placeholder="Enter your email..."></form><a href="#"
+						class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="ft-copyright">
+			<div class="ft-left">
+				<p>© 2017 Blockbuster. All Rights <a href="http://www.bootstrapmb.com/"
+						title="bootstrapmb">Reserved</a>. Designed by leehari.</p>
+			</div>
+			<div class="backtotop">
+				<p><a href="#" id="back-to-top">Back to top <i class="ion-ios-arrow-thin-up"></i></a></p>
+			</div>
+		</div>
+	</footer><!-- end of footer section-->
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$("#login-form").submit(function (event) {
+				event.preventDefault(); // 폼 제출 동작을 중단
+
+				// 사용자가 입력한 아이디와 비밀번호 가져오기
+				var username = $("#username").val();
+				var password = $("#password").val();
+
+				// Ajax 요청을 이용하여 로그인 시도
+				$.ajax({
+					type: "POST",
+					url: "/login", // 로그인을 처리하는 서버 엔드포인트
+					data: JSON.stringify({userId: username, userPw: password}),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function (data) {
+						alert("로그인 성공!"); // 로그인 성공 시 알림
+						window.location.replace("/user_info_form"); // 페이지 새로 고침 또는 리디렉션
+					},
+					error: function (xhr, status, error) {
+						alert("로그인 실패. 다시 시도하세요.");
+					}
+				});
+			});
+		});
+		
+
+
+		
+	</script>
+
+
+	
+    <!-- membershipStatus를 확인하고 팝업을 표시하는 스크립트 -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var membershipStatus = /*[[${membershipStatus}]]*/ '';
+        if (membershipStatus === 'alreadyHasMembership') {
+            alert('이미 멤버십을 보유하고 있습니다.');
+        }
+        /*]]>*/
+    </script>
+    
+    
+
+</body>
+
+</html>

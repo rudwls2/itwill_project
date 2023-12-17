@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+<head>
+<!-- Basic need -->
+<title>Mango>회원정보수정</title>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<link rel="profile" href="#">
+<!--Google Font-->
+<link rel="stylesheet"
+	href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+<!-- Mobile specific meta -->
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone-no">
+<!-- CSS files -->
+<link rel="stylesheet" href="css/plugins.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<!-- BEGIN | Header -->
+	<div th:insert="~{common_header :: headerFragment}"></div>
+	<!-- END | Header -->
+	<div class="page-single">
+		<div class="container">
+			<div class="row ipad-width">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="user-information">
+						<div class="user-img">
+							<a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
+						</div>
+						<div class="user-fav">
+							<p>Details</p>
+							<ul>
+								<li><a href="user_info_form">내정보</a></li>
+								<li class="active"><a href="user_modify_form">회원정보수정</a></li>
+								<li><a href="cart_main" id="cartForm">나의 장바구니</a></li>
+								<li><a href="order_history" id="orderForm">나의 주문내역</a></li>
+								<!--<li><a href="user_userList_form"
+									id="UserListForm">회원 목록</a></li>
+								<li><a href="user_order_info_form" id="OrderListForm">주문
+										목록</a></li>
+								<li><a href="user_inq_info_form" id="InquiryListForm">문의
+										목록</a></li>-->
+								<li><a href="#" data-toggle="modal" data-target="#withdrawalModal"
+                              id="userDelete">회원탈퇴</a></li>
+
+
+
+
+
+
+								<!-- <li><a href="user_info_form">내정보</a></li>
+								<li class="active"><a href="user_modify_form">회원정보수정</a></li>
+								<li><a href="cart_main" id="cartForm">나의 장바구니</a></li>
+								<li><a href="order_history" id="orderForm">나의 주문내역</a></li>
+								<li><a href="user_userList_form" id="UserListForm">회원목록</a></li>
+								<li><a href="user_order_info_form" id="OrderListForm">주문목록</a></li>
+								<li><a href="user_inq_info_form" id="InquiryListForm">문의
+										목록</a></li> -->
+								<!-- <li><a href="#">회원탈퇴</a></li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="form-style-1 user-pro" action="">
+						<form action="" class="password">
+							<h4>02. 회원정보수정</h4>
+							<div class="row">
+								<div class="col-md-6 form-it">
+									<label>UserName</label><input type="text"
+										placeholder="**********" th:value="${loginUser.userName}"
+										id="userName">
+								</div>
+								<div class="col-md-6 form-it">
+									<label>UserPassword</label><input type="text"
+										placeholder="***************" th:value="${loginUser.userPw}"
+										id="userPw">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 form-it">
+									<label>UserPhone</label><input type="text"
+										placeholder="**********" th:value="${loginUser.userPhone}"
+										id="userPhone">
+								</div>
+								<div class="col-md-6 form-it">
+									<label>UserAddress</label><input type="text"
+										placeholder="***************"
+										th:value="${loginUser.userAddress}" id="userAddress">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 form-it">
+									<label>UserEmail</label><input type="text"
+										placeholder="**********" th:value="${loginUser.userEmail}"
+										id="userEmail">
+								</div>
+								<div class="col-md-6 form-it">
+									<label></label><input type="hidden" placeholder="**********"
+										th:value="${loginUser.userId}" id="userId">
+									<!--ui에서 숨김 hidden 처리-->
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-2">
+									<input class="submit" type="submit" value="change"
+										onclick="updateUser()">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+	<!-- end of footer section-->
+
+	<script>
+		function updateUser() {
+			var userData = {
+				userName: document.getElementById("userName").value,
+				userPw: document.getElementById("userPw").value,
+				userPhone: document.getElementById("userPhone").value,
+				userAddress: document.getElementById("userAddress").value,
+				userEmail: document.getElementById("userEmail").value,
+				userId: document.getElementById("userId").value
+			};
+			
+			console.log(userId);
+			
+		    if (!isValidUserPhone(userData.userPhone)) {
+		        alert('전화번호 형식이 올바르지 않습니다.(ex 010-1234-5678)');
+		        return;
+		    }
+			if (!isValidUserEmail(userData.userEmail)) {
+		        alert('이메일 형식이 올바르지 않습니다.(ex user@example.com)');
+		        return;
+		    }
+		    
+			
+			// 서버로 데이터 전송
+			fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/user/update/${userData.userId}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(userData)
+			})
+				.then(response => response.json())
+				.then(updatedUserData => {
+					// 수정된 데이터를 화면에 업데이트
+					document.getElementById("userName").value = updatedUserData.userName;
+					document.getElementById("userPw").value = updatedUserData.userPw;
+					document.getElementById("userPhone").value = updatedUserData.userPhone;
+					document.getElementById("userAddress").value = updatedUserData.userAddress;
+					document.getElementById("userEmail").value = updatedUserData.userEmail;
+					document.getElementById("userId").value = updatedUserData.userId;
+
+					alert("회원정보 수정이 완료되었습니다.");
+					window.location.href = "user_info_form";
+				})
+				.catch(error => {
+					console.error('에러:', error);
+				});
+		}
+		
+		// 전화번호 유효성 검사 함수
+	    function isValidUserPhone(userPhone) {
+	        var regex = /^010-\d{4}-\d{4}$/;
+	        return regex.test(userPhone);
+	    }
+	    
+	    // 이메일 유효성 검사 함수
+	    function isValidUserEmail(userEmail) {
+	        var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	        return regex.test(userEmail);
+	    }
+		
+	</script>
+
+	<!-- <script>
+    // admin 계정 여부를 확인하는 함수
+    function isAdminUser() {
+        var userId = document.getElementById("userId").value;
+        return userId === 'admin';
+    }
+
+    // 페이지 로드 시 실행되는 함수
+    window.onload = function () {
+        // admin 계정으로 로그인한 경우
+        if (isAdminUser()) {
+            hideCartForm(); // 나의 장바구니 폼을 숨김
+            hideOrderForm(); // 나의 주문내역 폼을 숨김
+        }
+    };
+
+    // 나의 장바구니 폼을 숨기는 함수
+    function hideCartForm() {
+        var cartForm = document.getElementById("cartForm");
+        if (cartForm) {
+            cartForm.style.display = 'none';
+        }
+    }
+
+    // 나의 주문내역 폼을 숨기는 함수
+    function hideOrderForm() {
+        var orderForm = document.getElementById("orderForm");
+        if (orderForm) {
+            orderForm.style.display = 'none';
+        }
+    }
+    
+</script> -->
+
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/user.js"></script>
+</body>
+
+</html>

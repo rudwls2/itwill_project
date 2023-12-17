@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<body th:fragment="headerFragment">
+
+	<div id="preloader"><img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+		<div id="status"><span></span><span></span></div>
+	</div><!--end of preloading--><!--login form popup-->
+	<!--<div class="login-wrapper" id="login-content">
+		<div class="login-content">
+			<a href="#" class="close">x</a>
+			<h3>Login</h3>
+			<form method="post" action="user_login_action">
+				<div class="row">
+					<label for="loginId">UserId:<input type="text" name="loginId" id="loginId" placeholder="아이디"
+							pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$" required="required" /></label>
+				</div>
+				<div class="row">
+					<label for="loginPw">Password:<input type="text" name="loginPw" id="loginPw" placeholder="비밀번호"
+							pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$" required="required" /></label>
+				</div>
+				<div class="row">
+					<div class="remember">
+						<a href="user_write_form">회원가입하기</a>
+					</div>
+					<div class="remember">
+
+						<a href="userCheckIdPw">아이디찾기 / 비밀번호찾기</a>
+					</div>
+				</div>
+				<div class="row">
+					<button type="submit">Login</button>
+				</div>
+			</form>
+			<div class="row">
+				<p>Or via social</p>
+				<div class="social-btn-2">
+					<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
+					<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>-->
+	<!--end of login form popup--><!--signup form popup-->
+	<!--<div class="login-wrapper" id="signup-content">
+		<div class="login-content"><a href="#" class="close">x</a>
+			<h3>sign up</h3>
+			<form method="post" action="signup.php">
+				<div class="row"><label for="username-2">Username:<input type="text" name="username-2" id="username-2"
+							placeholder="Hugh Jackman" pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$"
+							required="required" /></label></div>
+				<div class="row"><label for="email-2"> your email:<input type="password" name="email-2" id="email-2"
+							placeholder="" pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$"
+							required="required" /></label></div>
+				<div class="row"><label for="password-2"> Password:<input type="password-2" name="password-2"
+							id="password-2" placeholder="" pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$"
+							required="required" /></label></div>
+				<div class="row"><label for="repassword-2"> re-type Password:<input type="repassword-2"
+							name="repassword-2" id="repassword-2" placeholder=""
+							pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$" required="required" /></label></div>
+				<div class="row"><button type="submit">sign up</button></div>
+			</form>
+		</div>
+	</div>--><!--end of signup form popup--><!-- BEGIN | Header -->
+	<header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header logo">
+					<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span
+							class="sr-only">Toggle navigation</span>
+						<div id="nav-icon1"><span></span><span></span><span></span></div>
+					</div><a href="index"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+				</div><!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav flex-child-menu menu-left">
+						<li class="hidden"><a href="#page-top"></a></li>
+						<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1"
+								data-toggle="dropdown">Home <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+							<ul class="dropdown-menu level1">
+								<li><a href="index">mango music</a></li>
+
+							</ul>
+						</li>
+						<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+								data-hover="dropdown"> 멜론차트<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+							<ul class="dropdown-menu level1">
+
+								<li><a href="music_list">TOP100</a></li>
+								<li><a href="music_list">최신음악</a></li>
+								<li><a href="music_list">장르음악</a></li>
+							</ul>
+						</li>
+						<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+								data-hover="dropdown"> shop<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+							<ul class="dropdown-menu level1">
+
+								<li><a href="ticket_list">망고티켓</a></li>
+								<li><a href="goods_list">망고굿즈</a></li>
+								<li><a href="membership_detail">멤버쉽</a></li>
+							</ul>
+						</li>
+						<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+								data-hover="dropdown"> 뮤직어워드 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+							<ul class="dropdown-menu level1">
+								<li><a href="productVote">뮤직어워드</a></li>
+							</ul>
+						</li>
+						<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+								data-hover="dropdown"> 게시판 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+							<ul class="dropdown-menu level1">
+								<li><a href="board_notification">공지사항</a></li>
+								<li><a href="board_faq">FAQ</a></li>
+								<li><a href="board_magazine">magazine</a></li>
+								<li><a href="board_inquiries">1대1문의</a></li>
+								<li><a href="board_event">이벤트</a></li>
+							</ul>
+						</li>
+						<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+								data-hover="dropdown"> 결제 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+							<ul class="dropdown-menu level1">
+								<li><a href="order_membership">멤버십결제</a></li>
+								<li><a href="order_ticket">티켓결제</a></li>
+								<li><a href="order_history">주문내역</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav flex-child-menu menu-right">
+						<li class="btn signupLink"><a href="user_login_form" id="loginbutton">로그인</a></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</nav><!-- top search form -->
+
+	</header><!-- END | Header -->
+	<div class="hero user-hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="hero-ct">
+						<h1>TEXT AREA</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>/챗gpt가 알려준거 적은거임..
+ -->
+	<script>
+		// 팝업 열기 - 로그인 폼
+		document.querySelector("#loginLink").addEventListener("click", function (event) {
+			event.preventDefault();
+			document.getElementById("login-content").style.display = "block";
+		});
+
+		// 로그인 버튼 클릭 이벤트 핸들러
+		$("#login-content button[type='submit']").click(function (event) {
+			event.preventDefault();
+
+			// UserId와 Password 값을 가져옵니다.
+			var userId = $("#loginId").val();
+			var userPw = $("#loginPw").val();
+
+			// AJAX를 사용해 서버로 로그인 요청을 보냅니다.
+			$.ajax({
+				type: "POST",
+				url: "/user_login_action",
+				data: JSON.stringify({userId: userId, userPw: userPw}),
+				contentType: "application/json",
+				dataType: "json",
+				success: function (response) {
+					if (response.success) {
+						// 로그인 성공 시 실행할 코드
+						alert("로그인에 성공했습니다.");
+						$("#login-content").hide(); // 팝업 닫기
+						// 페이지 리로드 또는 리다이렉트 등 로그인 후의 원하는 동작을 수행
+						window.location.href = "index"; // 예: 다른 페이지로 리다이렉트
+					} else {
+						// 로그인 실패 시 실행할 코드
+						alert("로그인에 실패했습니다.");
+					}
+				},
+				error: function (error) {
+					// AJAX 요청 오류 처리
+					alert("로그인 요청 중 오류가 발생했습니다: " + error.responseText);
+				}
+			});
+		});
+	</script>
+
+
+
+
+
+</body>
+
+
+</html>

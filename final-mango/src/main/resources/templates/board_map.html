@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Basic need -->
+	<title>Mango>Map</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+	<div th:insert="~{common_header :: headerFragment}"></div>
+
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="blog-detail-ct">
+						<h1>망고뮤직 찾아오는길 !</h1>
+						<div class="flex-it share-tag"></div>
+						<h4 style="margin-bottom: 30px;">망고뮤직 찾아오는길입니다.</h4>
+						</br>
+
+						<div id="map" style="width:850px;height:600px;"></div>
+
+						<h4 style="margin-top: 50px; color: yellow;">대중교통편 </h4>
+						<h5 style="margin-top: 10px; color: whitesmoke;">지하철 : 강남역 2호선 1번출구 276m </h5>
+						<!--h4>작성자 : <span th:text="${board.getUser().getUserId()}">id</span></h4<!--h4>
+
+						</br>
+						<h4 th:text="${board.boardCategory.boardCategoryName + ' - ' + board.boardType.boardTypeTitle}">
+						</h4>
+
+						</br>
+
+						<p>작성일 : <span th:text="${#temporals.format(board.createdTime, 'yyyy-MM-dd HH:mm')}"> </span>
+						</p>
+
+						<div id="boardId" th:text="${board.boardId}" style="display: none;">게시글 ID</div>
+
+						<pre th:utext="${board.boardContent}" style="margin-top: 50px; color: red;"></-->
+
+						<div class="flex-it share-tag"></div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+</body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95118bde95091988e1c186337c9f0b23"></script>
+<script type="text/javascript">
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(37.4987464, 127.03169), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	var markerPosition = new kakao.maps.LatLng(37.4987464, 127.03169);
+
+	// 빨간색 마커 아이콘 이미지 URL
+	var redMarkerImage = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
+
+	// 마커를 생성하고 속성을 설정 (아이콘 이미지를 빨간색으로 설정)
+	var marker = new kakao.maps.Marker({
+		position: markerPosition, // 마커의 위치
+		image: new kakao.maps.MarkerImage(redMarkerImage, new kakao.maps.Size(64, 69))
+	});
+
+
+	// 마커를 지도에 추가
+	marker.setMap(map);
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+
+</html>

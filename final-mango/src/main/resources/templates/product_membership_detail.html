@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango>멤버쉽</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style77.css">
+</head>
+
+<body><!--preloading-->
+	<div th:insert="~{common_header::headerFragment}">
+			<h2>멤버쉽 구독</h2>
+			<h2 class="text-yellow"> 최신음악 무제한 재생 가능! </h2>
+			<h2>90일 이용 가능</h2>
+			<a href="" class="redbtn" id="discover-now"> 멤버쉽 구매하기 </a>
+	</div><!--end of signup form popup-->
+	
+	<div class="landing-version">
+		<div class="container">
+			<div class="col-md-6"><img src="images/tmembership.png" alt="Dark Version">
+			<!--<div class="col-md-6"><img src="images/uploads/mango.png" alt="Dark Version">-->
+				<h2>30일 멤버십</h2> 
+				<a href="order_membership" target="_self" class="redbtn">결제하기</a>
+			</div>
+			<div class="col-md-6"><img src="images/tmembership1year.png" alt="Dark Version">
+			<!--<div class="col-md-6"><img src="images/uploads/mango_logo2.png" alt="Light Version">-->
+				<h2>365일 멤버십</h2>
+				<a href="index" target="_self" class="redbtn">Comming Soon</a>
+			</div>
+		</div>
+	</div>
+	
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+
+</body>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+
+</html>

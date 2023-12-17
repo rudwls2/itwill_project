@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+		.dropdown-container {
+			display: flex;
+		}
+
+		.dropdown-form {
+			margin-right: 30px;
+			/* 오른쪽 마진을 추가하여 간격 조절 가능 */
+		}
+	</style>
+
+</head>
+
+<body>
+	<div th:insert="~{common_header :: headerFragment}">
+	</div>
+
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="blog-detail-ct">
+
+						<input type="text" id="postTitle" name="postTitle" value="제목을 입력해주세요" size="40"
+							style="height: 70px; font-size: 30px; margin-bottom: 40px;"
+							onfocus="if (this.value == '제목을 입력해주세요') this.value = '';">
+
+
+						<div class="dropdown-container">
+							<span class="currenttime" style="color: yellow; font-weight: bold; ">27 Mar 2017</span>
+
+							<form action="#" class="dropdown-form" style="width: 200px; margin-left: 50px;">
+								<select name="languages" id="lang1" onchange="updateLang2Options()">
+									<option value="카테고리설정">카테고리설정</option>
+									<option value="1.공지사항">1.공지사항</option>
+									<option value="2.이벤트">2.이벤트</option>
+									<option value="3.매거진">3.매거진</option>
+									<option value="4.1대1문의">4.1대1문의</option>
+									<option value="5.FAQ">5.FAQ</option>
+								</select>
+							</form>
+
+							<form action="#" class="dropdown-form" style="width: 200px; ">
+								<select name="languages" id="lang2">
+									<option value="타입설정">타입설정</option>
+								</select>
+							</form>
+						</div>
+						<input type="text" id="postContent" name="postContent" value="내용을 입력해주세요" size="40"
+							style="height: 500px; font-size: 20px; margin-bottom: 20px; margin-top: 40px;"
+							onfocus="if (this.value == '내용을 입력해주세요') this.value = '';">
+
+
+						<div class="comments"></div>
+						<div class="comment-form">
+
+							<div class="dropdown-container">
+								<form action="">
+									<input class="submit" type="button" value="작성하기" style="margin-left:250px;"
+										onclick="board_write_action()">
+								</form>
+								<form action="">
+									<input class="submit" type="button" value="돌아가기" style="margin-left: 50px;"
+										onclick="goBack()">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="sidebar">
+						<div class="sb-search sb-it">
+						</div>
+						<div class="sb-cate sb-it">
+						</div>
+						<div class="sb-recentpost sb-it">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+
+
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div>
+
+</body>
+
+<script>
+	var currentDate = new Date();
+	var options = {timeZone: 'Asia/Seoul'};
+	var koreanDate = currentDate.toLocaleString('en-US', options);
+
+	// koreanDate를 사용하여 HTML 요소의 텍스트를 업데이트
+	document.querySelector(".currenttime").textContent = koreanDate;
+
+
+
+	function updateLang2Options() {
+		var lang1 = document.getElementById("lang1");
+		var lang2 = document.getElementById("lang2");
+
+		// 선택된 값을 가져옵니다.
+		var selectedLang1 = lang1.options[lang1.selectedIndex].value;
+		console.log(selectedLang1)
+		// lang2 드롭다운을 초기화합니다.
+		lang2.innerHTML = "";
+
+		// 선택된 lang1에 따라 lang2 드롭다운을 업데이트합니다.
+		if (selectedLang1 === "1.공지사항") {
+			// "공지사항"이 선택된 경우, lang2에 해당 옵션을 추가합니다.
+			var option = document.createElement("option");
+			option.value = "2.일반공지";
+			option.text = "일반공지";
+			lang2.appendChild(option);
+			var option = document.createElement("option");
+			option.value = "3.서비스공지";
+			option.text = "서비스공지";
+			lang2.appendChild(option);
+			var option = document.createElement("option");
+			option.value = "4.시스템공지";
+			option.text = "시스템공지";
+			lang2.appendChild(option);
+			var option = document.createElement("option");
+			option.value = "1.기타";
+			option.text = "기타";
+			lang2.appendChild(option);
+		} else if (selectedLang1 === "5.FAQ") {
+			var option = document.createElement("option");
+			option.value = "5.회원정보";
+			option.text = "회원정보";
+			lang2.appendChild(option);
+			var option = document.createElement("option");
+			option.value = "6.결제/환불";
+			option.text = "결제/환불";
+			lang2.appendChild(option);
+			var option = document.createElement("option");
+			option.value = "7.이벤트";
+			option.text = "이벤트";
+			lang2.appendChild(option);
+			var option = document.createElement("option");
+			option.value = "1.기타";
+			option.text = "기타";
+			lang2.appendChild(option);
+		} else if (selectedLang1 === "3.매거진") {
+			var option = document.createElement("option");
+			option.value = "12.MAGAZINE";
+			option.text = "MAGAZINE";
+			lang2.appendChild(option);
+		} else if (selectedLang1 === "2.이벤트") {
+			var option = document.createElement("option");
+			option.value = "10.진행중이벤트";
+			option.text = "진행중이벤트";
+			lang2.appendChild(option);
+		} else if (selectedLang1 === "4.1대1문의") {
+			var option = document.createElement("option");
+			option.value = "9.답변대기중";
+			option.text = "답변대기중";
+			lang2.appendChild(option);
+		} else {
+			// 기타 경우에는 다른 옵션을 추가할 수 있습니다.
+			var option = document.createElement("option");
+			option.value = "타입설정";
+			option.text = "타입설정";
+			lang2.appendChild(option);
+		}
+	}
+
+	function goBack() {
+		window.history.back();
+	}
+
+
+	function board_write_action() {
+		var postTitle = $("#postTitle").val();
+		var postContent = $("#postContent").val();
+		var postCategory = $("#lang1").val();
+		var categoryNumber = parseInt(postCategory.split('.')[0]);
+		
+		var postType = $("#lang2").val();
+		var typeNumber = parseInt(postType.split('.')[0]);
+		console.log(postCategory);
+		console.log(categoryNumber);
+		console.log(postType);
+		console.log(typeNumber);
+
+
+		const writeData = {
+			"boardTitle": postTitle,
+			"boardContent": postContent,
+			"boardImage": null,
+			"boardCategoryId": categoryNumber,
+			"boardTypeId": typeNumber,
+
+			"boardReadCount": 0,
+			"userId": "admin"
+		}
+
+		fetch('/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_create', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(writeData)
+		})
+			.then(response => {
+				if (response.status === 201) {
+					alert('게시글이 등록되었습니다.');
+					window.location.href = '/2023-05-JAVA-DEVELOPER-final-project-team1-mango/index';
+
+				} else {
+					alert('게시글 등록에 실패했습니다.');
+				}
+			})
+			.catch(error => {
+				alert('에러 발생: ' + error);
+			});
+	}
+</script>
+
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+
+
+</html>

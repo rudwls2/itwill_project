@@ -1,0 +1,34 @@
+/* 관리자 페이지 전체 배경 */
+.admin_container {
+  display: grid;
+  background-color: #020D18;
+}
+
+/* 주문 페이지 광고 사이드바 시작 */
+#advertisement {
+  /* 좌측 사이드바 너비 */
+  width: 200px; 
+  font: bold 20px 'Noto Sans KR', sans-serif;
+  background-color:white;
+  height: 800px;
+  padding-top: 20px;
+}
+
+
+/* 유저 테이블 영역 스타일 */
+.content {
+  flex-grow: 1; 
+  background-color: #020D18; 
+  padding: 20px; 
+  margin-left: 100px;
+}
+
+.content img{
+	width: 100px;
+    border-radius: 30%;
+	
+}
+
+
+
+

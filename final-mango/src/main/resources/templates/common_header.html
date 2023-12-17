@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<body th:fragment="headerFragment">
+
+	<div id="preloader"><img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+		<div id="status"><span></span><span></span></div>
+	</div><!--end of preloading--><!--login form popup-->
+	<!--<div class="login-wrapper" id="login-content">
+		<div class="login-content">
+			<a href="#" class="close">x</a>
+			<h3>Login</h3>
+			<form method="post" action="user_login_action">
+				<div class="row">
+					<label for="loginId">UserId:<input type="text" name="loginId" id="loginId" placeholder="아이디"
+							pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$" required="required" /></label>
+				</div>
+				<div class="row">
+					<label for="loginPw">Password:<input type="text" name="loginPw" id="loginPw" placeholder="비밀번호"
+							pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$" required="required" /></label>
+				</div>
+				<div class="row">
+					<div class="remember">
+						<a href="user_write_form">회원가입하기</a>
+					</div>
+					<div class="remember">
+
+						<a href="userCheckIdPw">아이디찾기 / 비밀번호찾기</a>
+					</div>
+				</div>
+				<div class="row">
+					<button type="submit">Login</button>
+				</div>
+			</form>
+			<div class="row">
+				<p>Or via social</p>
+				<div class="social-btn-2">
+					<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
+					<a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>-->
+	<!--end of login form popup--><!--signup form popup-->
+	<!--<div class="login-wrapper" id="signup-content">
+		<div class="login-content"><a href="#" class="close">x</a>
+			<h3>sign up</h3>
+			<form method="post" action="signup.php">
+				<div class="row"><label for="username-2">Username:<input type="text" name="username-2" id="username-2"
+							placeholder="Hugh Jackman" pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$"
+							required="required" /></label></div>
+				<div class="row"><label for="email-2"> your email:<input type="password" name="email-2" id="email-2"
+							placeholder="" pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$"
+							required="required" /></label></div>
+				<div class="row"><label for="password-2"> Password:<input type="password-2" name="password-2"
+							id="password-2" placeholder="" pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$"
+							required="required" /></label></div>
+				<div class="row"><label for="repassword-2"> re-type Password:<input type="repassword-2"
+							name="repassword-2" id="repassword-2" placeholder=""
+							pattern="^[a-zA-Zㄱ-힣][a-zA-Zㄱ-힣0-9-_\.]{3,15}$" required="required" /></label></div>
+				<div class="row"><button type="submit">sign up</button></div>
+			</form>
+		</div>
+	</div>--><!--end of signup form popup--><!-- BEGIN | Header -->
+	
+	<!-- menu타임리 -->
+	<header class="ht-header">
+		<div class="container">
+			<div th:insert="~{common_menu :: menuFragment}"></div>
+		</div>
+	</header>
+
+	<div class="hero user-hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="hero-ct">
+						<h1></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+</body>
+
+
+</html>

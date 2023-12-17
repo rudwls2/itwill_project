@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Basic need -->
+	<title>Mango>최신음악</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/product.css">
+	<link rel="stylesheet" href="css/productTest.css">
+</head>
+
+<body>
+	<!--preloading-->
+	<div th:insert="~{common_header::headerFragment}"></div>
+
+	<!-- celebrity grid v2 section-->
+	<div class="page-single">
+		<div class="container">
+			<div class="row ipad-width2">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="topbar-filter">
+						<p class="pad-change">
+							Total <span th:text="${#lists.size(newestMusic)}">1,608 </span> music
+						</p>
+
+					</div>
+
+
+					<!-- 원래코드 <div class="row" id="musicList"> -->
+					<div id="musicList" style="display:grid; grid-template-columns:500px 500px;">
+						<div class="music_List" th:each="newest : ${newestMusic}">
+							<div class="flex-wrap-movielist user-fav-list">
+								<div class="movie-item-style-2">
+
+									<p style="padding-right: 20px; color: #ffffff; font-weight: bold;
+											background-color: #405266" th:text="|${newestStat.count}|">번호</p>
+									<!-- Stat.count 사용 -> 실시간 순위 -->
+									<a th:href="@{/product_music_detail(productNo=${newest.productNo})}">
+										<img th:src="${newest.productImage}" alt="" style="width: 100px">
+									</a>
+									<div class="mv-item-infor">
+										<h6>
+											<a style="color: white;" class="musicName"
+												th:href="@{/product_music_detail(productNo=${newest.productNo})}"
+												th:text="${newest.productName}">Leonardo DiCaprio</a>
+										</h6>
+										<p class="describe"></p>
+										<p class="artist" th:text="${newest.productArtist}"> artist name </p>
+										<p>
+											조회수: <a th:text="${newest.readCount}">2</a>
+										</p>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="sidebar">
+						<div class="sb-search sb-it">
+							<h4 class="sb-title">Search</h4>
+							<input type="text" id="searchInput" placeholder="제목 / 아티스트 검색">
+						</div>
+
+						<!--userId가 admin일때 보이기 -->
+						<div class="searh-form">
+							<form class="form-style-1 celebrity-form" action="#">
+								<div class="row">
+									<div class="col-md-12 ">
+										<input class="btn1" type="button" value="작성하기">
+										<button class="btn1">play sound1</button>
+									</div>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<a id="topBtn" href="#"><img src="images/upward-arrow-60.png"></a>
+	</div>
+	<!-- end of celebrity grid v2 section-->
+
+	<!-- footer section-->
+	<footer class="ht-footer" th:insert="~{common_footer::footerFragment}">
+
+	</footer>
+	<!-- end of footer section-->
+</body>
+
+<script>
+	document.querySelector(".btn1").addEventListener("click", function () {
+		var audio1 = new Audio("./css/Luxery.mp3");
+		audio1.loop = false; // 반복재생하지 않음
+		audio1.volume = 0.5; // 음량 설정
+		audio1.play(); // sound1.mp3 재생
+	});
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/product.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+</html>

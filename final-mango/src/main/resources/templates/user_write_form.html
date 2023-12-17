@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Basic need -->
+<title>Mango>회원가입</title>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<link rel="profile" href="#">
+<!--Google Font-->
+<link rel="stylesheet"
+	href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+<!-- Mobile specific meta -->
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone-no">
+<!-- CSS files -->
+<link rel="stylesheet" href="css/plugins.css">
+<link rel="stylesheet" href="css/style.css">
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+</head>
+<body>
+	<!--preloading-->
+	<div th:insert="~{common_header :: headerFragment}"></div>
+
+	<!-- BEGIN | Header -->
+	<header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom"></nav>
+	</header>
+	<div class="page-single">
+		<div class="container">
+			<div class="row ipad-width">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="user-information">
+						<div class="user-img">
+							<a href="#"><img src="images/uploads/user-img.png" alt=""><br></a>
+							<!-- <li class="loginLink"><a href="#" class="redbtn" id="loginㅁㄴㅇLink">로그인</a></li> -->
+							<!--end of preloading-->
+							<!--login form popup-->
+							<div class="login-wrapper" id="login-content">
+								<div class="login-content">
+									<a href="#" class="close">x</a>
+									<h3>Login</h3>
+									<form method="post" action="user_login_action">
+										<div class="row">
+											<label for="loginId">UserId:<input type="text"
+												name="loginId" id="loginId" placeholder="아이디" /></label>
+										</div>
+										<div class="row">
+											<label for="password"> Password:<input
+												type="password" name="password" id="password"
+												placeholder="비밀번호" /></label>
+										</div>
+										<div class="row">
+											<div class="remember">
+												<a href="user_write_form">회원가입하기</a>
+											</div>
+											<div class="remember">
+												<a href="userCheckIdPw">아이디찾기 / 비밀번호찾기</a>
+											</div>
+										</div>
+										<div class="row">
+											<button type="submit" id="loginButton">Login</button>
+										</div>
+									</form>
+									<div class="row">
+										<p>Or via social</p>
+										<div class="social-btn-2">
+											<a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a><a
+												class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--end of login form popup-->
+						<div class="user-fav">
+							<ul>
+								<li><a href="user_login_form">01. 로그인</a></li>
+								<li class="active"><a href="user_write_form">02. 회원가입</a></li>
+								<li><a href="user_CheckIdPw">03. 아이디, 비번찾기</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="form-style-1 user-pro" action="">
+						<form name="f" method="post">
+							<h4>01. UserInfo</h4>
+							<div class="row">
+								<div class="col-md-6 form-it">
+									<label>UserId</label> <input type="text" id="userId"
+										name="userId" placeholder="아이디를 입력하세요." required="required">
+								</div>
+								<div class="col-md-6 form-it">
+									<label>UserPassword</label> <input type="password" id="userPw"
+										name="userPw" placeholder="비밀번호를 입력하세요." required="required">
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 form-it">
+									<label>UserName</label> <input type="text" id="userName"
+										name="userName" placeholder="이름을 입력하세요." required="required">
+								</div>
+								<div class="col-md-6 form-it">
+									<label>UserPhone</label> <input type="text" id="userPhone"
+										name="userPhone" placeholder="전화번호를 입력하세요."
+										required="required">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 form-it">
+									<label>UserEmail</label> <input type="text" id="userEmail"
+										name="userEmail" placeholder="이메일을 입력하세요." required="required">
+								</div>
+								<div class="col-md-6 form-it">
+									<label>UserJumin</label> <input type="text" id="userJumin"
+										name="userJumin" placeholder="주민번호를 입력하세요."
+										required="required">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 form-it">
+									<label>UserAddress</label> <input type="text" id="userAddress"
+										name="userAddress" placeholder="주소를 입력하세요."
+										required="required">
+								</div>
+								<div class="col-md-6 form-it">
+									<label>UserGender</label> <select id="userGender"
+										name="userGender">
+										<option value="남">남</option>
+										<option value="여">여</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<!-- Submit button -->
+									<input class="submit" id="savebutton" type="button"
+										value="회원가입" onclick="writeForm()">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+	<!-- end of footer section-->
+
+	<script th:inline="javascript">
+    function writeForm() {
+        var formData = {
+            userId: document.getElementById("userId").value,
+            userPw: document.getElementById("userPw").value,
+            userName: document.getElementById("userName").value,
+            userPhone: document.getElementById("userPhone").value,
+            userEmail: document.getElementById("userEmail").value,
+            userJumin: document.getElementById("userJumin").value,
+            userAddress: document.getElementById("userAddress").value,
+            userGender: document.getElementById("userGender").value
+        };
+        
+     // 각 필드의 유효성 검사
+        if (!formData.userId) {
+            alert('아이디를 입력하세요.');
+            return;
+        }
+        if (!isValidUserId(formData.userId)) {
+            alert('아이디는 영문자, 숫자만 사용 가능하며, 4자 이상 15자 이하여야 합니다.');
+            return;
+        }
+        if (!formData.userPw) {
+            alert('비밀번호를 입력하세요.');
+            return;
+        }
+        if (!formData.userName) {
+            alert('이름을 입력하세요.');
+            return;
+        }
+        if (!formData.userPhone) {
+            alert('전화번호를 입력하세요.');
+            return;
+        }
+        if (!formData.userEmail) {
+            alert('이메일을 입력하세요.');
+            return;
+        }
+        if (!formData.userJumin) {
+            alert('주민번호를 입력하세요.');
+            return;
+        }
+        if (!formData.userAddress) {
+            alert('주소를 입력하세요.');
+            return;
+        }
+        if (!isValidUserPhone(formData.userPhone)) {
+            alert('전화번호 형식이 올바르지 않습니다.(ex 010-1234-5678)');
+            return;
+        }
+        if (!isValidUserJumin(formData.userJumin)) {
+            alert('주민번호 형식이 올바르지 않습니다.(ex 231115-*******)');
+            return;
+        }
+        if (!isValidUserEmail(formData.userEmail)) {
+            alert('이메일 형식이 올바르지 않습니다.(ex user@example.com)');
+            return;
+        }
+
+        // Send form data to the server
+        fetch('/2023-05-JAVA-DEVELOPER-final-project-team1-mango/user/join', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.status === 201) {
+                alert('회원가입이 성공적으로 완료되었습니다.');
+                window.location.href = "user_login_form";
+            } else if (response.status === 400) {
+                response.text().then(message => {
+                    alert(message);
+                });
+                window.location.href = "user_write_form";
+            } else {
+                // Other exceptions
+                alert('회원가입 시도를 다시 해주세요');
+            }
+        })
+        .catch(error => {
+            console.error('에러:', error);
+        });
+    }
+    
+    // 아이디 유효성 검사 함수
+    function isValidUserId(userId) {
+        var regex = /^[a-zA-Z0-9]{4,15}$/;
+        return regex.test(userId);
+    }
+    
+ // 전화번호 유효성 검사 함수
+    function isValidUserPhone(userPhone) {
+        var regex = /^010-\d{4}-\d{4}$/;
+        return regex.test(userPhone);
+    }
+ // 주민번호 유효성 검사 함수
+    function isValidUserJumin(userJumin) {
+        var regex = /^\d{6}-\d{7}$/;
+        return regex.test(userJumin);
+    }
+ // 이메일 유효성 검사 함수
+    function isValidUserEmail(userEmail) {
+        var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return regex.test(userEmail);
+    }
+</script>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+
+</body>
+
+</html>

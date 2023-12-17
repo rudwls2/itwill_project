@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango>망고티켓</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/product.css">
+	<link rel="stylesheet" href="css/productTest.css">
+</head>
+
+<body>
+	<!--preloading-->
+	<!-- END | Header -->
+	<div th:insert="~{common_header::headerFragment}">
+	</div>
+	<!-- celebrity grid v1 section-->	
+<div class="page-single">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-sm-12 col-xs-12">
+        <div class="topbar-filter">
+          <p class="pad-change">
+            총 <span th:text="${#lists.size(tickets)}">1,608</span> 건의 ticket
+          </p>
+
+          <!-- 정렬조건 -->
+          <label>Sort by:</label>
+		<select id="sortSelect">
+			<option value="readCountAsc">조회수 오름차순</option>
+			<option value="readCountDesc">조회수 내림차순</option>
+			<option value="dateAsc">최신순</option>
+			<option value="dateDesc">오래된순</option>
+		</select>
+
+        </div>
+
+ <!-- 티켓리스트 -->
+        <div class="row" id="ticketList">
+          <div class="movie-item-style-3" th:id="'ticketItem_' + ${ticket.productNo}" th:each="ticket, iterStat : *{tickets}" th:if="${iterStat.index lt 13}">
+           
+           <div class="movie-item-style-2">
+            <a th:href="@{/product_ticket_detail(productNo=${ticket.productNo})}" href="celebritylist.html">
+              <img th:src="${ticket.productImage}" alt="" style="width: 200px">
+            </a>
+            <div class="mv-item-infor">
+              <h6>
+                <a class="ticketName" th:href="@{/product_ticket_detail(productNo=${ticket.productNo})}" th:text="${ticket.productName}">티켓명</a>
+              </h6>
+              <p>티켓가격 : <span th:text="${ticket.productPrice}"></span> 원</p>
+              <p>잔여좌석 : <span th:text="${ticket.productStock}"></span> 좌석 남았습니다.</p>
+              <p>조 회 수 : <span th:text="${ticket.readCount}"></span> 분이 조회했습니다</p>
+              <p>등록날짜 : <span th:text="${ticket.productDate}"></span> 에 등록되었습니다</p>
+            </div>
+            
+            </div>
+          </div>
+        </div>        
+      </div>
+      
+<!--검색기능-->      
+		<div class="col-md-3 col-xs-12 col-sm-12">
+		    <div class="sidebar">
+		        <div class="searh-form">
+		            <h4 class="sb-title">검색하기</h4>
+		            <form class="form-style-1 celebrity-form" action="#">
+		                <div class="form-it">
+		                    <label>티켓이름</label>
+		                    <input type="text" id="searchInput" placeholder="Enter keywords">
+		                </div>
+		                <div>
+		                    <input class="submit" type="submit" value="submit">
+		                </div>
+		            </form>
+		        </div>
+		    </div>
+		</div> 
+<!--////////////////////////////////////////////////////////////////////////////// -->		       
+		    </div>
+		  </div>
+		</div>	
+            </div>
+        </div>
+        <a id="topBtn" href="#"><img src="images/upward-arrow-60.png" ></a>
+    </div>
+	</div><!--end of celebrity grid v1 section--><!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div>
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/product.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+	<div th:insert="~{common_header :: headerFragment}">
+	</div>
+
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="topbar-filter">
+						<p class="pad-change" th:text="${userIdString+'님 모든 문의사항은 ' + inquiries.size() + '개입니다'}">
+							userName님의 문의 총 <span>N</span> 개 입니다
+						</p>
+						<label>분류 : </label>
+						<select id="selectOption">
+							<option value="inqall">전체</option>
+							<option value="inqfalse">답변대기중</option>
+							<option value="inqtrue">답변완료</option>
+						</select>
+					</div>
+
+
+					<div class="row">
+						<div class="row" id="inquiriesContainer">
+							<div th:each="inquiries : ${inquiries}">
+
+								<div class="ceb-item-style-2">
+									<div class="ceb-infor">
+
+
+										<h2>
+
+											<a th:href="@{/board_other_detail1(boardId=${inquiries.boardId})}"
+												th:text="${inquiries.boardTitle}">로그인</a>
+										</h2>
+										<p th:text="${#temporals.format(inquiries.createdTime, 'yyyy-MM-dd HH:mm')}">
+										</p>
+
+
+										<p th:text="${inquiries.getUser.getUserName}+' 님의 문의사항'"></p>
+										<p th:text="${inquiries.boardType.boardTypeTitle}"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+					</div>
+				</div>
+
+
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="sidebar">
+						<div class="sb-search sb-it">
+							<h4 class="sb-title">Search Title</h4><input type="text" id="searchInput"
+								placeholder="Enter keywords">
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- end of celebrity list section--><!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div>
+
+
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+
+<script>
+
+	document.addEventListener('DOMContentLoaded', function () {
+		const searchInput = document.getElementById('searchInput');
+		var titleElements = document.querySelectorAll('.ceb-item-style-2 h2 a');
+		var inquiriesContainer = document.getElementById('inquiriesContainer');
+
+		searchInput.addEventListener('keydown', function (event) {
+			if (event.key === 'Enter') {
+				const searchValue = searchInput.value;
+
+				filterItems(searchValue);
+				searchInput.value = ''; // 검색어 필드 비우기
+			}
+		});
+
+		function filterItems(searchQuery) {
+			inquiriesContainer.innerHTML = ''; // 리스트 비우기
+
+			titleElements.forEach(function (titleElement, index) {
+				var title = titleElement.textContent;
+				console.log("titleElement->" + titleElement);
+				if (title.toLowerCase().includes(searchQuery.toLowerCase())) {
+					var item = titleElement.closest('.ceb-item-style-2'); // 부모 .ceb-item-style-2 요소 선택
+					inquiriesContainer.appendChild(item);
+				}
+			});
+		}
+	});
+
+
+	$(document).ready(function () {
+		var initialData = $('#inquiriesContainer').html();
+		var inquiriesContainer = $('#inquiriesContainer');
+		
+		function filterItems(filter) {
+			inquiriesContainer.empty();
+			var itemList = $(initialData).find('.ceb-item-style-2').toArray();
+			$.each(itemList, function (index, item) {
+				var status = $(item).find('p').eq(2).text(); // 수정된 부분
+				if (filter === 'inqall' || (filter === 'inqfalse' && status === '답변대기중') || (filter === 'inqtrue' && status === '답변완료')) {
+					inquiriesContainer.append(item);
+				}
+			});
+		}
+
+		$('#selectOption').on('change', function () {
+			var selectedOption = $(this).val();
+			filterItems(selectedOption);
+		});
+
+		filterItems('inqall');
+	});
+
+
+
+
+
+</script>
+
+
+</html>

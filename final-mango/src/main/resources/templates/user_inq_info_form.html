@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+
+<head><!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<!--Bootstrap CSS
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	Bootstrap JS and Popper.js
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+
+</head>
+
+<body>
+	<!-- BEGIN | Header -->
+	<div th:insert="~{common_header :: headerFragment}"></div>
+	<!-- END | Header -->
+	<div class="page-single">
+		<div class="container">
+			<div class="row ipad-width">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="user-information">
+						<div class="user-img"><a href="#"><img src="images/uploads/user-img.png" alt=""><br></a></div>
+						<div class="user-fav">
+							<p>Details</p>
+							<ul>
+								<li><a href="user_info_form">내정보</a></li>
+								<li><a href="user_modify_form">회원정보수정</a></li>
+								<!--<li><a href="cart_main" id="cartForm">나의 장바구니</a></li>
+								<li><a href="order_history" id="orderForm">나의 주문내역</a></li>-->
+								<li><a href="user_userList_form" id="UserListForm">회원 목록</a></li>
+								<li><a href="user_order_info_form" id="OrderListForm">주문 목록</a></li>
+								<li class="active"><a href="user_inq_info_form" id="InquiryListForm">문의 목록</a></li>
+								<!--<li><a href="#" data-toggle="modal" data-target="#withdrawalModal"
+										id="userDelete">회원탈퇴</a></li>-->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- 모달 창 -->
+
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="form-style-1 user-pro" action="">
+						<div class="content" style="color: white; padding: 20px;">
+							<h1 style="margin-left: 280px; margin-bottom: 100px; margin-top: 20px;">문의 목록</h1>
+							<table>
+								<tr style="font-size: 15px; color: lightpink; ">
+									<td style="width:15%;">아이디</td>
+									<td style="width:15%;">이름</td>
+									<td style="width:20%;">날짜</td>
+									<td style="width:15%;">답변여부</td>
+									<td style="width:30%;">답변제목</td>
+								</tr>
+
+								<tr th:each="inquiries : ${inquiries}">
+									<td th:text="${inquiries.getUser.getUserId}">아이디</td>
+									<td th:text="${inquiries.getUser.getUserName}">이름</td>
+									<td th:text="${#temporals.format(inquiries.createdTime, 'yyyy.MM.dd HH:mm')}">작성일
+									</td>
+									<td th:text="${inquiries.boardType.boardTypeTitle}">답변여부</td>
+									<td>
+										<a th:href="@{/board_other_detail1(boardId=${inquiries.boardId})}"
+											th:text="${inquiries.BoardTitle}" style="color: white;">타이틀</a>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+						<!-- 유저 테이블 종료 -->
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div><!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div><!-- end of footer section-->
+
+	<script>
+		function confirmWithdrawal() {
+			// 로그인 한 유저의 아이디
+			var userId = document.getElementById("userId").value;
+			console.log("아이디:" + userId);
+
+			// 로그인 한 유저의 비밀번호
+			var userPw = document.getElementById("userPw").value;
+			console.log("비번:" + userPw);
+
+			// 모달에서 입력한 비밀번호 값
+			var enteredPassword = document.getElementById("password").value;
+			console.log("모달입력값:" + enteredPassword);
+
+			// 비밀번호 입력 확인
+			if (!enteredPassword) {
+				alert("비밀번호를 입력하세요.");
+				return;
+			}
+
+			// 비밀번호 확인
+			if (userPw === enteredPassword) {
+				//	$("#withdrawalButton").prop("disabled", true);
+
+				$.ajax({
+					url: `/2023-05-JAVA-DEVELOPER-final-project-team1-mango/user/delete/${userId}`,
+					method: 'DELETE',
+					success: function (data) {
+						alert("회원 탈퇴 성공!");
+						closeWithdrawalModal();
+					},
+					error: function (error) {
+						alert("회원 탈퇴 실패. 다시 시도해주세요.");
+						console.error("Error deleting user:", error);
+					},
+					complete: function () {
+						// 비동기 처리 완료 후 버튼 활성화
+						$("#withdrawalButton").prop("disabled", false);
+					}
+				});
+			} else {
+				alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+			}
+		}
+
+		function closeWithdrawalModal() {
+			// 모달 닫기
+			$('#withdrawalModal').modal('hide');
+			window.location.href = "user_login_form";
+		}
+
+	</script>
+
+	<!--<script>
+		// 페이지 로드 시 실행되는 함수
+		window.onload = function () {
+			// admin 계정으로 로그인한 경우
+			if (isAdminUser()) {
+				hideCartForm(); // 나의 장바구니 폼을 숨김
+
+				hideOrderForm(); // 나의 주문내역 폼을 숨김
+
+				showUserListForm(); // 회원 목록 폼을 보임
+
+				showOrderListForm(); // 주문 목록 폼을 보임
+
+				showInquiryListForm(); //문의 목록 폼을 보임
+
+			}
+			if (!isAdminUser()) {
+				//회원 목록 폼을 숨김
+				hideUserListForm();
+			}
+		};
+
+		// admin 계정 여부를 확인하는 함수
+		function isAdminUser() {
+			var userId = document.getElementById("userId").value;
+			return userId === 'admin';
+		}
+
+		// 나의 장바구니 폼을 숨기는 함수
+		function hideCartForm() {
+			var cartForm = document.getElementById("cartForm");
+			if (cartForm) {
+				cartForm.style.display = 'none';
+			}
+		}
+		// 나의 주문내역 폼을 숨기는 함수
+		function hideOrderForm() {
+			var orderForm = document.getElementById("orderForm");
+			if (orderForm) {
+				orderForm.style.display = 'none';
+			}
+		}
+
+		// 회원 목록 폼을 보이게 하는 함수
+		function showUserListForm() {
+			var UserListForm = document.getElementById("UserListForm");
+			if (UserListForm) {
+				UserListForm.style.display = 'block';
+			}
+		}
+
+		// 회원 목록 폼을 숨기는 함수
+		function hideUserListForm() {
+			var UserListForm = document.getElementById("UserListForm");
+			if (UserListForm) {
+				UserListForm.style.display = 'none';
+			}
+		}
+
+		// 주문 목록 폼을 보이게 하는 함수
+		function showOrderListForm() {
+			var OrderListForm = document.getElementById("OrderListForm");
+			if (OrderListForm) {
+				OrderListForm.style.display = 'block';
+			}
+		}
+
+		// 문의 목록 폼을 보이게 하는 함수
+		function showInquiryListForm() {
+			var InquiryListForm = document.getElementById("InquiryListForm");
+			if (InquiryListForm) {
+				InquiryListForm.style.display = 'block';
+			}
+		}
+
+	</script>-->
+
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<!--<script src="js/user.js"></script>-->
+</body>
+
+</html>

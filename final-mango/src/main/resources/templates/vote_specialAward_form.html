@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Manggo MusicAward</title>
+	<link rel="stylesheet" href="css/voteMain.css" type="text/css">
+	<link rel="stylesheet" href="css/vote_special.css" type="text/css">
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+	</style>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="js/vote.js"></script>
+</head>
+
+<body>
+
+	<!-- 상 이름 리스트 -->
+
+
+
+	<div class="awardList">
+		<a class="logo" href="index"> <img src="images/mango_logo2.png" height="40px"></a>
+
+		<div id="menu">
+			<ul>
+				<li><a href="#">주간 인기상</a>
+					<ul>
+						<li><a href="#" onclick="voteEnd()">11월 1주</a></li>
+						<li><a href="productVote">11월 2주</a></li>
+						<li><a href="#" onclick="votePreparing()">11월 3주</a></li>
+						<li><a href="#" onclick="votePreparing()">11월 4주</a></li>
+					</ul>
+				</li>
+
+				<li><a href="#">월간 인기상</a>
+					<ul>
+						<li><a href="#" onclick="voteEnd()">9월</a></li>
+						<li><a href="#" onclick="voteEnd()">10월</a></li>
+						<li><a href="#" onclick="votePreparing()">11월</a></li>
+					</ul>
+				</li>
+
+				<li><a href="#">히스토리</a>
+					<ul>
+						<li><a href="bestAward">베스트상</a></li>
+						<li><a href="specialAward">특별상</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="login">
+			<ul>
+				<li th:if="${loginUser == null}">
+					<a href="user_login_form">로그인</a>
+				</li>
+				<li th:if="${loginUser != null}">
+					<a href="user_logout_action" th:text="${loginUser.userId + ' 님 로그아웃'}">로그아웃</a>
+				</li>
+				<li th:if="${loginUser == null}">
+					<a href="user_write_form">회원가입</a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+	<!-- 베스트상 시작 -->
+	<h1 id="bestAward_Title">특별상</h1>
+	<div id="vote_bestAward">
+		
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/resource/image/cds/musicstory/imgUrl20220502040300921.jpg/melon/optimize/90"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold;">네티즌 인기상</div>
+			<div style="text-align: center;">임영웅</div>
+		</div>
+
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/007/91/216/791216_20230109113440_500.jpg?897fb136b57ca0e2eadf7d63ab0d8ab9/melon/resize/416/quality/80/optimize"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold;">글로벌 아티스트</div>
+			<div style="text-align: center;">몬스타엑스</div>
+		</div>
+		
+		
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/030/92/950/3092950_20231027105934_500.jpg?94039da6f35500ea091c337abab34666/melon/resize/416/quality/80/optimize"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold;">핫트렌드상</div>
+			<div style="text-align: center;">LE SSERAFIM (르세라핌)</div>
+		</div>
+
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/028/99/290/2899290_20230816115316_500.jpg?5e1c10bbd9d060abfb4fb8b6e016fc0e/melon/resize/416/quality/80/optimize"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold;">글로벌 라이징 아티스트</div>
+			<div style="text-align: center;">STAYC(스테이씨)</div>
+		</div>
+
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/026/32/253/2632253_20231013103136_500.jpg?ae2b174214564eedb266ee5d7cc4217b/melon/resize/416/quality/80/optimize"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold;">베스트 퍼포먼스</div>
+			<div style="text-align: center;">투모로우바이투게더</div>
+		</div>
+
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/cm2/album/images/108/90/384/10890384_20220314111504_500.jpg?4b9dba7aeba43a4e0042eedb6b9865c1/melon/resize/282/quality/80/optimize"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold; ">올해의 뮤직비디오</div>
+			<div style="text-align: center;">(여자)아이들</div>
+		</div>
+		
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/031/14/174/3114174_20230707095732_500.jpg?d93f93cf05ca87c9525e62263936c6b5/melon/resize/416/quality/80/optimize"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold;">라이징 여자 그룹</div>
+			<div style="text-align: center;">NewJeans</div>
+		</div>
+		
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/034/78/478/3478478_20231026104537_500.jpg?6886631a826940a1244c81ca1d2161e7/melon/resize/416/quality/80/optimize"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold;">라이징 남자 그룹</div>
+			<div style="text-align: center;">RIIZE</div>
+		</div>
+		
+		<div id="vote_bestAward_Artist">
+			<a><img src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/031/01/552/3101552_20220708170805_500.jpg?d9f80be45bf1fe9e8031eb7413a2dc0b/melon/resize/416/quality/80/optimize"></a>
+			<div style="text-align: center; font-size: 20px; margin-bottom: 5px; color: #FFBB00; font-weight: bold;">프로젝트 그룹상</div>
+			<div style="text-align: center;">WSG워너비</div>
+		</div>
+		
+	</div>
+
+
+	<!-- 베스트상 종료-->
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango>이벤트</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body><!--preloading-->
+	<div th:insert="~{common_header :: headerFragment}">
+	</div>
+
+
+
+
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="topbar-filter ">
+						<p>총 <span th:text="${#lists.size(events)}"></span> 개의 이벤트 </p>
+						<select id="choiceSelect">
+							<option value="all">전체 이벤트</option>
+							<option value="ing">진행중 이벤트</option>
+							<option value="end">종료된 이벤트</option>
+						</select>
+					</div>
+
+					<div class="row" id="eventContainer">
+
+
+						<div class="flex-wrap-movielist user-fav-list">
+							<div th:each="event, stat : ${events}">
+
+								<div class="movie-item-style-2">
+									<img th:src="${event.boardImage}" alt="">
+									<div class="mv-item-infor">
+										<h6>
+											<a th:href="@{/board_detail(boardId=${event.boardId})}"
+												th:text="${event.boardTitle}"></a>
+										</h6>
+										<p class="describe"></p>
+										<p class="run-time" th:text="${event.boardType.boardTypeTitle}">Run Time: 2h21’
+										</p>
+										<p>상품: <a href="#" th:text="${event.boardPrize}">1</a></p>
+										<p>조회수: <a href="#" th:text="${event.boardReadCount}">2</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="sidebar">
+						<div class="sb-search sb-it">
+							<h4 class="sb-title">Search Title</h4><input type="text" id="searchInput"
+								placeholder="Enter keywords">
+						</div>
+
+						<!--userId가 admin일때 보이기 -->
+						<div th:if="${session == null or (userIdString != null and userIdString == 'admin')}"
+							class="searh-form">
+							<form class="form-style-1 celebrity-form"
+								action="/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_write">
+								<div class="row">
+									<div class="col-md-12">
+										<input class="submit" type="submit" value="작성하기">
+									</div>
+								</div>
+							</form>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div><!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div>
+
+</body>
+
+<script>
+
+	document.addEventListener('DOMContentLoaded', function () {
+		const searchInput = document.getElementById('searchInput');
+		var titleElements = document.querySelectorAll('.movie-item-style-2 h6 a');
+		var eventContainer = document.getElementById('eventContainer');
+
+		searchInput.addEventListener('keydown', function (event) {
+			if (event.key === 'Enter') {
+				const searchValue = searchInput.value;
+
+				filterItems(searchValue);
+				searchInput.value = ''; // 검색어 필드 비우기
+			}
+		});
+
+		function filterItems(searchQuery) {
+			eventContainer.innerHTML = ''; // 리스트 비우기
+
+			titleElements.forEach(function (titleElement, index) {
+				var title = titleElement.textContent;
+				console.log("title: " + title);
+
+				if (title.toLowerCase().includes(searchQuery.toLowerCase())) {
+					var item = titleElement.closest('.movie-item-style-2'); // 부모 .movie-item-style-2 요소 선택
+					eventContainer.appendChild(item);
+				}
+			});
+		}
+	});
+
+
+
+</script>
+
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/board.js"></script>
+
+</html>

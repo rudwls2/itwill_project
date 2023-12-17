@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+
+<head><!-- Basic need -->
+	<title>Mango>망고티켓>detail</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/productTest.css">
+
+</head>
+
+<body><!--preloading-->
+	<div th:insert="~{common_header::headerFragment}"></div>
+	<!-- END | Header -->
+
+	<div class="ticketBackground" style="margin-top: 100px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--티켓 정보[시작]-->
+	<div class="page-single movie-single movie_single">
+		<!--컨테이너[시작]-->
+		<div class="container">
+			<div class="row ipad-width2">
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="movie-img sticky-sb"><img th:src="${findTicket.productImage}"
+							src="images/uploads/movie-single.jpg" alt="" style="max-width: 100%">
+
+						<!--뮤비 보기 버튼-->
+						<div class="movie-btn">
+							<!--<div class="btn-transform transform-vertical red">
+								<div><a th:href="${findTicket.productMovie}" href="https://www.youtube.com/embed/o-0hcF97wy0" class="item item-1 redbtn"><i class="ion-play"></i>트레일러 보기</a>
+								</div>
+								<div><a th:href="${findTicket.productMovie}" href="https://www.youtube.com/embed/o-0hcF97wy0"
+										class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a>
+								</div>
+							</div>-->
+
+							<!--티켓 구매하기 버튼-->
+							<div class="btn-transform transform-vertical">
+								<div><a th:href="@{/order_ticket(productNo=${productNo})}"
+										class="item item-1 yellowbtn"><i class="ion-card"></i>티켓 구매</a></div>
+								<div><a th:href="@{/order_ticket(productNo=${productNo})}"
+										class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<!--티켓 정보표시[시작]-->
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<div class="movie-single-ct main-content">
+						<h1 class="bd-hd" th:text="${findTicket.productName}">Skyfall: Quantum of Spectre
+						</h1>
+						<p>참여가수 : <span th:text="${findTicket.productArtist}" style="margin-bottom: 15px;">2015</span>
+						</p>
+						<p>공연일자 : <span th:text="${findTicket.productDate}" style="margin-bottom: 15px;"></span></p>
+						<span>
+							<p>티켓가격 : <span th:text="${findTicket.productPrice}" style="margin-bottom: 15px;"></span>원
+							</p>
+							<p>잔여좌석 : <span th:text="${findTicket.productStock}" style="margin-bottom: 15px;"></span>석
+							</p>
+							<p>공연장소 : <span th:text="${findTicket.productAddress}" style="margin-bottom: 15px;"></span>
+							</p>
+
+							<div class="social-btn"><a href="#" class="parent-btn"><i class="ion-heart"></i>Add to
+									Favorite</a>
+								<div class="hover-bnt"><a href="#" class="parent-btn"><i
+											class="ion-android-share-alt"></i>share</a>
+									<div class="hvr-item"><a href="#" class="hvr-grow"><i
+												class="ion-social-facebook"></i></a><a href="#" class="hvr-grow"><i
+												class="ion-social-twitter"></i></a><a href="#" class="hvr-grow"><i
+												class="ion-social-googleplus"></i></a><a href="#" class="hvr-grow"><i
+												class="ion-social-youtube"></i></a></div>
+								</div>
+							</div>
+					</div>
+					<!--</div>-->
+					<!--티켓 좋아요[시작]-->
+					<div class="movie-rate">
+						<div class="rate" style="margin-bottom: 30px;">
+							<p>추천 개수 : <span th:text="${findTicket.productStar}">8.1</span>명이 추천해주셨습니다.<br>
+							<span class="rv" th:text="${ReplyList.size()} + ' 개의 댓글이 있습니다.'"></span></p>							
+						</div>
+					</div>
+					<!--티켓 좋아요[마지막]-->
+
+					<!--탭 전체[시작]-->
+					<div class="movie-tabs">
+						<!--탭 [시작]-->
+						<div class="tabs">
+							<ul class="tab-links tabs-mv">
+								<li class="active"><a href="#overview">상세설명</a></li>
+								<li><a href="#reviews">댓글쓰기</a></li>
+								<li><a href="#media">오시는길</a></li>
+							</ul>
+
+							<!--탭 내용 [시작]-->
+							<div class="tab-content">
+								<!--상세설명 [시작]-->
+								<div id="overview" class="tab active">
+									<h2 th:text = "|공연제목 : ${findTicket.productName}|" style="color: white; font-size: 30px; margin-top:15px; margin-bottom: 15px;"></h2>
+									<h3 th:text = "|아티스트 : ${findTicket.productArtist}|" style="color: orange; font-size: 20px; margin-top:15px; margin-bottom: 15px;"></h3>
+									<!--<img th:src="${findTicket.productImage}" src="images/uploads/movie-single.jpg"
+										alt="" style="max-width: 100%">-->
+
+									<div class="row">
+										<div class="col-md-8 col-sm-12 col-xs-12">
+											<p><span th:text="${findTicket.productContent}"></span></p>
+											<div class="title-hd-sm">
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--상세설명 [마지막]-->
+
+								<!--댓글보기 전체[시작]-->
+								<div id="reviews" class="tab review" style="margin-bottom: 10px;">
+									<!--<h3>공연제목 : <span th:text="${findTicket.productName}"></span></h3>
+									<h4>아티스트 : <span th:text="${findTicket.productArtist}"></span></h3>-->
+									
+									<!--댓글보기 내용[시작]-->
+									<div class="tab active" style="margin-top: 40px; margin-bottom: 50px;">
+										
+										<div style="margin-bottom:10px;"></div>
+										<!--정렬탭[시작]-->
+										<div class="comments" style="margin-bottom: 50px;">
+											<h4 th:text="| 총 ${ReplyList.size()} 개의 댓글|" style="color: white;">
+												Comments</h4>
+										
+																				<!--<div class="topbar-filter">
+																					<p>총 <span th:text="${ReplyList.size()} + ' 개의 댓글'"
+																							style="color: white; border-bottom: 1px solid #233a50;"></span>
+																					</p>
+																					<select>
+																						<option value="popularity">최신순</option>
+																						<option value="popularity">오래된순</option>
+																					</select>
+																				</div>-->
+										
+											<!--정렬탭[마지막]-->
+										
+											<div style="margin-top: 30px;">
+												<div class="cmt-item flex-it" th:each="ReplyList : ${ReplyList}"
+													style="background: #233a50; margin-top: 10px;border: 15px solid #233a50; border-radius: 10px;">
+													<img src="images/icons8-account-48.png" alt="">
+													<div class="author-infor">
+														<div class="flex-it2">
+															<!--Name으로 체인지 가능-userinfo-->
+															<h6 th:text="${ReplyList.getUser.getUserName}" style="color: white; font-size: 20px;">
+																Name
+															</h6>
+															<span class="time" th:text="|[${ReplyList.getUser.getUserId}]|"> userId </span>
+															<span class="time" th:text="${#temporals.format(ReplyList.CreDateTime,'yyyy-MM-dd HH:mm')}"> 27 Mar
+																2017</span>
+														</div>
+														<p th:text="${ReplyList.ProductReplyContent}" style="color: white;"> content </p>
+													</div>
+										
+												</div>
+											</div>
+										</div>
+								
+										<!--리스트 나열 [마지막]-->
+
+										<!--댓글작성하기 폼	[시작]-->
+										<div class="comment-form" style="color: white; 
+												margin-top:30px; margin-bottom: 30px; background-color: #233a50; border: 15px solid #233a50; border-radius: 5px">
+											<h4 style="margin-top:15px; margin-bottom: 15px; background-color: #233a50;">댓글쓰기</h4>
+											<div style="margin-bottom:20px; border-bottom:10px double #8ab1b5;"></div>
+											<form action="">
+												<div class="row">
+													<div class="col-md-4">
+														<input type="text" placeholder="작성자 이름" id="comment_id"
+															style="font-size: 15px;" th:value="${userIdString}">
+													</div>
+
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<textarea name="message" id="comment_content"
+															placeholder="댓글을 입력하세요"
+															style="margin-top: 5px; margin-bottom: 5px; height: 100px;"></textarea>
+													</div>
+												</div>
+												<input class="submit" type="button" value="댓글달기"
+													onclick="create_reply()"
+													style="background-color : white; color: #5c5c5c;">
+											</form>
+										</div>
+
+										<!--댓글작성하기 폼	[마지막]-->
+										<!--댓글 수정 및 삭제 폼[시작]-->
+										<!--													<div class="comment-form">
+														<div class="dropdown-container">
+															<div class="row">
+																댓글 수정 버튼[시작]
+																<div class="col-md-6">
+																	<form action="">
+																		<input class="submit" type="button" value="수정하기"
+																			onclick="update_reply_form()"
+																			style="margin-left: 250px;">
+																	</form>
+																</div>
+																댓글 수정 버튼[마지막]
+
+																댓글 삭제버튼[시작]
+																<div class="col-md-6">
+																	<form id="deleteForm">
+																		<input class="submit" value="삭제하기" type="button"
+																			onclick="deleteForms()"
+																			style="margin-left: 10%;">
+																	</form>
+																</div>
+																댓글 삭제버튼[마지막]
+															</div>
+
+														</div>
+													</div>-->
+										<!--댓글 수정 및 삭제 폼[마지막]-->
+
+										
+										<!--댓글란[마지막]-->
+									</div>
+									<!--댓글보기 내용[마지막]-->
+
+								</div>
+								<!--댓글보기 전체[마지막]-->
+
+								<!--오시는길[시작]-->
+								<div id="media" class="tab">
+									<div class="row">
+										<div class="col-md-9 col-sm-12 col-xs-12">
+											<div class="blog-detail-ct">
+												<h1>공연주소</h1>
+												<!--<div class="flex-it share-tag"></div>-->
+												<h4 style="margin-bottom: 5px; color: orange;"><span
+														th:text="${findTicket.productAddress}"></span></h4></br>
+												<img th:src="${findTicket.productMovie}"alt="" style="max-width: 200%">
+	
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--오시는길[마지막]-->
+
+							</div>
+							<!--탭 내용 [마지막]-->
+						</div>
+						<!--탭 [마지막]-->
+					</div>
+					<!--탭 전체 [마지막]-->
+				</div>
+				<!--티켓 정보표시[마지막]-->
+			</div>
+		</div>
+		<!--컨테이너[마지막]-->
+	</div>
+	<!--티켓 정보[마지막]-->
+	<!-- footer section-->
+
+
+
+
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div>
+</body>
+<script>
+	/*///////////////////////////댓글전체[시작]///////////////////////////*/
+
+	/*================댓글작성[시작]================*/
+	function create_reply() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const productNo = urlParams.get("productNo");
+		console.log(productNo);
+
+		var commentContent = $("#comment_content").val()
+		console.log(commentContent);
+
+		var commentId = $("#comment_id").val()
+		console.log(commentId);
+
+		const commentData = {
+			"productReplytTitle": "댓글타이틀",
+			"productReplyContent": commentContent,
+			"productNo": productNo,
+			"userId": commentId //세션처리 아이디넣으면 자동으로 이름들어옴
+		}
+		console.log(commentData);
+		fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/product_reply_create/${productNo}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(commentData)
+		})
+			.then(response => {
+				if (response.status === 201) {
+					alert('댓글 등록되었습니다.');
+					//	location.reload(); // 현재 페이지를 새로 고침
+					window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/product_ticket_detail?productNo=" + productNo;
+				} else {
+					alert('댓글 등록에 실패했습니다.');
+					alert('에러 발생: ' + error);
+
+				}
+			})
+			.catch(error => {
+				alert('에러 발생: ' + error);
+			});
+		/*================댓글작성[마지막]================*/
+
+	}
+
+
+	/*================댓글삭제[시작]================
+	function deleteForms() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const productNo = urlParams.get("productNo");
+
+		fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/delete/${productNo}`, {
+			method: "DELETE",
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					alert("댓글이 삭제되었습니다.");
+					/*alert("메인으로 이동합니다.");
+					window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/product_ticket_detail?productNo=" + productNo;
+				} else {
+					alert("게시글 삭제에 실패했습니다.");
+				}
+			})
+			.catch((error) => {
+				alert("에러발생.")
+				console.error("에러:", error);
+			})
+			.finally(() => {
+				// 비활성화된 버튼을 활성화
+				deleteButton.disabled = false;
+			});
+	}
+	/*================댓글작성[마지막]================*/
+
+	/*================댓글수정[시작]================
+	//수정하기폼으로 이동
+	function update_reply_form() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const productNo = urlParams.get("productNo");
+
+		window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/product_ticket_detail?productNo=" + productNo;
+	}
+	================댓글작성[마지막]================*/
+
+
+
+</script>
+///////////////////////////댓글전체[마지막]///////////////////////////-->
+
+<!--///////////////////////////지도전체[시작]///////////////////////////-->
+<!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95118bde95091988e1c186337c9f0b23"></script>
+<script type="text/javascript">
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(37.4987464, 127.03169), //지도의 중심좌표.
+		level: 2 //지도의 레벨(확대, 축소 정도)
+	};
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	var markerPosition = new kakao.maps.LatLng(37.4987464, 127.03169);
+
+	// 빨간색 마커 아이콘 이미지 URL
+	var redMarkerImage = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
+
+	// 마커를 생성하고 속성을 설정 (아이콘 이미지를 빨간색으로 설정)
+	var marker = new kakao.maps.Marker({
+		position: markerPosition, // 마커의 위치
+		image: new kakao.maps.MarkerImage(redMarkerImage, new kakao.maps.Size(64, 69))
+	});
+
+
+	// 마커를 지도에 추가
+	marker.setMap(map);
+</script>-->
+///////////////////////////지도전체[마지막]///////////////////////////
+
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+<!--<script src="js/product.js"></script>-->
+
+</html>

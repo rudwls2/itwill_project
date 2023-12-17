@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango>망고굿즈</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name "keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!-- Google Font -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600" />
+	<!-- Mobile specific meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/product.css">
+	<link rel="stylesheet" href="css/productTest.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+</head>
+
+<body>
+	<!-- Preloading -->
+	<div th:insert="~{common_header :: headerFragment}">
+	</div>
+
+	<!-- 정렬조건 -->
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="topbar-filter">
+						<p class="pad-change">
+							총 <span th:text="${#lists.size(goodsList)}"></span> 개의 Goods!
+						</p>
+
+					</div>
+
+					<!--굿즈리스트-->
+					<div class="row" id="goodsList"
+						style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+						<!--<div class = "celebrity-items">-->
+						<div class="celebrity-items3" th:id="'goodsItem_' + ${goods.productNo}"
+							th:each="goods, iterStat : *{goodsList}" th:if="${iterStat.index lt 12}"
+							style="flex: 0 0 calc(33.33% - 10px); margin-right: 10px;">
+
+							<!--<div class="celebrity-items2">-->
+							<div class="ceb-item">
+								<img th:src="${goods.productImage}" alt=""
+									style="width: 100%; height: 200px; margin-bottom: 30px; margin-top: 30px;">
+								<div class="ceb-infor">
+									<h2 style="margin-bottom: 30px;">
+										<a class="goodsName"
+											th:href="@{/product_goods_detail(productNo=${goods.productNo})}"
+											th:text="${goods.productName}" style="font-size: 20px; color: white;">상품명</a>
+									</h2>
+									<p>PRICE : <a th:text="${goods.productPrice}" class="red-text"
+											style="margin-bottom: 40px;"></a> ₩</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+				<!--검색기능-->
+				<div class="col-md-3 col-xs-12 col-sm-12">
+					<div class="sidebar">
+						<div class="searh-form">
+							<h4 class="sb-title">검색하기</h4>
+							<form class="form-style-1 celebrity-form" action="#">
+								<div class="form-it">
+									<input type="text" id="searchInput" placeholder="굿즈이름을 검색해주세요">
+								</div>
+								<div>
+									<input class="submit" type="button" value="검색하기">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!--////////////////////////////////////////////////////////////////////////////// -->
+			</div>
+			<a id="topBtn" href="#"><img src="images/upward-arrow-60.png"></a>
+		</div>
+	</div>
+	<!-- footer section -->
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div>
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/product.js"></script>
+	<script src="js/cart.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+</body>
+
+</html>

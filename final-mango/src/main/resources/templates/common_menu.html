@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="menuFragment">
+
+	<nav class="navbar navbar-default navbar-custom">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header logo">
+			<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span
+					class="sr-only">Toggle navigation</span>
+				<div id="nav-icon1"><span></span><span></span><span></span></div>
+			</div><a href="index"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+		</div><!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav flex-child-menu menu-left">
+				<li class="hidden"><a href="#page-top"></a></li>
+				<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">Home <i
+							class="fa fa-angle-down" aria-hidden="true"></i></a>
+					<ul class="dropdown-menu level1">
+						<li><a href="index">mango music</a></li>
+
+					</ul>
+				</li>
+				<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+						data-hover="dropdown"> 멜론차트<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+					<ul class="dropdown-menu level1">
+
+						<li><a href="product_music_list">TOP100</a></li>
+						<li><a href="product_music_newest">최신음악</a></li>
+						<!--<li><a href="product_music_list">장르음악</a></li>-->
+					</ul>
+				</li>
+				<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+						data-hover="dropdown"> shop<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+					<ul class="dropdown-menu level1">
+
+						<li><a href="product_ticket_list">망고티켓</a></li>
+						<li><a href="product_goods_list">망고굿즈</a></li>
+						<li><a href="product_membership_detail">멤버십</a></li>
+					</ul>
+				</li>
+				<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+						data-hover="dropdown"> 뮤직어워드 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+					<ul class="dropdown-menu level1">
+						<li><a href="productVote">뮤직어워드</a></li>
+					</ul>
+				</li>
+				<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+						data-hover="dropdown"> 게시판 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+					<ul class="dropdown-menu level1">
+						<li><a href="board_notification">공지사항</a></li>
+						<li><a href="board_faq">FAQ</a></li>
+						<li><a href="board_magazine">magazine</a></li>
+
+						<li>
+							<a th:href="${session.sUserId == 'admin' ? 'user_inq_info_form' : 'board_inquiries'}">
+								1대1문의
+							</a>
+						</li>
+
+
+						<li><a href="board_event">이벤트</a></li>
+						<li><a href="board_map">찾아오는길</a></li>
+					</ul>
+				</li>
+				<!--				<li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
+						data-hover="dropdown"> 결제 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+					<ul class="dropdown-menu level1">
+						<li><a href="order_membership">멤버십결제</a></li>
+						<li><a th:href="order_ticket">티켓결제</a></li>
+						<li><a href="order_history">주문내역</a></li>
+					</ul>
+				</li>-->
+			</ul>
+			<ul class="nav navbar-nav flex-child-menu menu-right" th:if="${session.sUserId==null}">
+				<a href="user_login_form" onclick="showLoginAlert()"><img src="images/uploads/cart_main_logo.png"></a>
+				<li class="btn">
+					<a href="user_login_form">Login</a>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav flex-child-menu menu-right" th:unless="${session.sUserId == null}">
+				<span th:if="${session.sUserId != 'admin'}">
+					<a href="cart_main">
+						<img src="images/uploads/cart_main_logo.png" style="margin-right: 10px">
+					</a>
+				</span>
+				<a href="user_info_form" th:text="${session.sUserName + '  님'}" style="margin-right: 20px"></a>
+				<li class="btn">
+					<a href="user_logout_action">Logout</a>
+				</li>
+			</ul>
+
+
+		</div><!-- /.navbar-collapse -->
+	</nav><!-- top search form -->
+
+
+	<script>
+
+
+	</script>
+</body>

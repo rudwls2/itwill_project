@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+	<div th:insert="~{common_header :: headerFragment}"></div>
+
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="blog-detail-ct">
+						<div class="flex-it share-tag"></div>
+
+
+
+						<h1 id="titletext" th:text="${board.boardTitle}" contenteditable="true"
+							style="border: 2px solid rgb(2, 15, 25);"></h1>
+
+
+						<h4>작성자 : <span th:text="${board.getUser().getUserId()}">id</span></h4>
+
+						</br>
+						<h4 th:text="${board.boardCategory.boardCategoryName + ' - ' + board.boardType.boardTypeTitle}">
+						</h4>
+
+						<p th:text="${board.boardCategory.boardCategoryName}" id="categoryName" style="display: none;">
+						</p>
+
+						</br>
+
+						<p>작성일 : <span th:text="${#temporals.format(board.createdTime, 'yyyy-MM-dd HH:mm')}"> </span>
+						</p>
+
+
+						<div id="boardId" th:text="${board.boardId}" style="display: none;">게시글 ID</div>
+
+
+						<pre th:utext="${board.boardContent}" contenteditable="true" id="contenttext"
+							style="border: 2px solid rgb(2, 15, 25); line-height: 20px; height:1000px ; width: 1000px; color: white;">
+						  </pre>
+
+
+						<div class="flex-it share-tag"></div>
+						<div class="comments"></div>
+
+
+						<div class="comment-form">
+							<div class="dropdown-container">
+								<div class="row">
+									<div class="col-md-6">
+										<form action="">
+											<input class="submit" type="button" value="수정하기" style="margin-left: 250px;"
+												onclick="update_action()">
+										</form>
+									</div>
+									<div class="col-md-6">
+										<form action="">
+											<input class="submit" type="button" value="돌아가기" style="margin-left: 10%;"
+												onclick="goback()">
+										</form>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-sm-12 col-xs-12">
+		<div class="sidebar">
+			<div class="sb-cate sb-it"></div>
+			<div class="sb-recentpost sb-it"></div>
+			<div class="sb-tags sb-it"></div>
+		</div>
+	</div>
+
+
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+</body>
+
+<script>
+
+	function goback() {
+		window.history.back();
+	}
+
+	function update_action() {
+		var textData = $('#titletext').html();
+		var contentData = $('#contenttext').html();
+		var categoryValue = $("#categoryName").html();
+
+		if (categoryValue === "공지사항") {
+			categoryValue = "notification";
+		} else if (categoryValue == "이벤트") {
+			categoryValue = "event";
+		} else if (categoryValue == "매거진") {
+			categoryValue = "magazine";
+		} else if (categoryValue == "1대1문의") {
+			categoryValue = "inquiries";
+		} else if (categoryValue == "FAQ") {
+			categoryValue = "faq";
+		} else {
+			categoryValue = "index";
+		}
+
+		console.log(categoryValue);
+		console.log(textData);
+		console.log(contentData);
+
+		const updateData = {
+			boardTitle: textData,
+			boardContent: contentData
+		}
+		const urlParams = new URLSearchParams(window.location.search);
+		const boardId = urlParams.get("boardId");
+		const boardIdInt = parseInt(boardId, 10);
+
+		console.log(boardIdInt);
+
+		fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_update/${boardIdInt}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json", // JSON 데이터를 보낸다고 명시
+			},
+			body: JSON.stringify(updateData)
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					alert("게시글이 수정되었습니다.");
+					alert("메인으로 이동합니다.");
+					window.location.href = `/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_${categoryValue}`;
+				} else {
+					alert("게시글 수정에 실패했습니다.");
+				}
+			})
+			.catch((error) => {
+				alert("에러발생.")
+				console.error("에러:", error);
+			})
+
+
+	}
+
+
+
+
+
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+
+</html>

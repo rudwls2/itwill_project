@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]-->
+<!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Basic need -->
+<title>Open Pediatrics</title>
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<link rel="profile" href="#">
+<!--Google Font-->
+<link rel="stylesheet"
+	href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+<!-- Mobile specific meta -->
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone-no">
+<!-- CSS files -->
+<link rel="stylesheet" href="css/plugins.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body style="background-color: #020D18;">
+	<!--preloading-->
+	<div th:insert="~{common_header :: headerFragment}"></div>
+
+	<!-- BEGIN | Header -->
+	<header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom"></nav>
+	</header>
+
+	<div id="admin_container"
+		style="display: grid; grid-template-columns: 200px 1fr;">
+		<!-- 관리자 페이지 사이드바 시작 -->
+		<div id="admin_menu">
+			<ul>
+				<li class="accordion"><a href="admin">회원</a>
+				
+				<li class="accordion"><a href="admin_music">상품</a>
+					<ul class="submenu">
+						<li><a href="admin_music">음악</a></li>
+						<li><a href="admin_goods">굿즈</a></li>
+						<li><a href="admin_ticket">티켓</a></li>
+					</ul>
+				</li>
+				<li class="accordion"><a href="admin_Board">게시판</a>
+					<ul class="submenu">
+						<li><a href="#">공지사항</a></li>
+						<li><a href="#">Q&A</a></li>
+						<li><a href="#">1대1문의</a></li>
+					</ul></li>
+				<li class="accordion"><a href="#">기타기능</a>
+					<ul class="submenu">
+						<li><a href="#">투표</a></li>
+						<li><a href="#">결제</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<!-- 관리자 페이지 사이드바 종료 -->
+
+		<!-- 유저 테이블 시작 -->
+		<div class="content" style="color: white; padding: 20px;">
+			<h1 style="margin-left: 600px; margin-bottom: 100px; margin-top: 20px;">굿즈 목록</h1>
+			
+			<table>
+				<tr style="font-size: 20px;">
+					<td style=" width: 43px;"><input type="checkbox" name="userList"></td>
+					<th>사용자 ID</th>
+					<th>이름</th>
+					<th>주소</th>
+					<th>이메일</th>
+					<th>주민번호</th>
+					<th>전화번호</th>
+					<th>성별</th>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="user1"></td>
+					<td>사용자1</td>
+					<td>이름1</td>
+					<th>주소1</th>
+					<th>이메일1</th>
+					<th>주민번호1</th>
+					<th>전화번호1</th>
+					<th>성별1</th>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="user2"></td>
+					<td>사용자2</td>
+					<td>이름2</td>
+					<th>주소2</th>
+					<th>이메일2</th>
+					<th>주민번호2</th>
+					<th>전화번호2</th>
+					<th>성별2</th>
+				</tr>
+				<!-- 다른 사용자 데이터 추가 -->
+			</table>
+		
+		 <button id="user_deleteButton"style="margin-top: 20px;color: black;margin-left: 600px;">삭제하기</button>
+		 <button id="user_updateButton" style="margin-top: 20px;color: black;margin-left: 50px;">수정하기</button>
+		
+		</div>
+		<!-- 유저 테이블 종료 -->
+
+	</div>
+
+
+
+
+
+
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+	<!-- end of footer section-->
+
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/admin.js"></script>
+</body>
+
+</html>

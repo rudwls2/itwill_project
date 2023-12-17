@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango>망고티켓>주문</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins5.css">
+	<link rel="stylesheet" href="css/style35.css">
+</head>
+
+<body>
+	
+	<div th:insert="~{common_header :: headerFragment}"></div>
+
+	<div class="page-single movie_list">
+		<div class="container">
+			<div class="row ipad-width2">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<div class="topbar-filter"></div>
+					<div class="movie-item-style-2">
+						<!--<img th:src="@{'images/' + ${ticketImage}}" alt="">-->
+						<img th:src="${ticketImage}" alt="">
+						<div class="mv-item-infor">
+							<h6><a href="ticket_list" th:text="${ticketName}">티켓명<span>(2023)</span></a></h6>
+							<p class="rate"><i class="ion-android-star"></i><span th:text="${ticketStar}">7.0</span>/10
+							</p>
+
+							<p class="describe" th:text="${ticketContent}">
+								내용
+							</p>
+
+							<p class="run-time" th:text="'일자: '+${ticketDate}+' / 위치: '+${ticketAddress}">공연장소: 여의도
+								<span>공연일자: 13 Sep 2023</span></p>
+							<p th:text="'Artist: '+${ticketArtist}">Director:<a href="#">IU</a></p>
+							<p th:text="'남은좌석수 '+${ticketStock}+' 개'"></p>
+						</div>
+					</div>
+					<div class="topbar-filter">
+					</div>
+					<div class="col-md-8 col-sm-12 col-xs-12">
+						<div>
+							<p style="margin-bottom: 10px; font-weight: bold; font-size: 22px;">유의사항</p>
+							<p style="margin-top: 20px; margin-bottom: 20px; font-weight: bold; font-size: 15px;">티켓</p>
+							<p>사용 기간이 만료된 쿠폰은 할인에 적용되지 않습니다.<br>
+							   하나의 티켓 결제당 하나의 쿠폰만 사용하실 수 있습니다.<br>
+							   본 공연은 예매자 본인이 직접 예매하셔야 하며, 양도를 금합니다.<br>
+							</p>
+						</div>
+						<div>
+							<p style="margin-top: 20px; margin-bottom: 20px; font-weight: bold; font-size: 15px;">결제 및 해지</p>
+							<p>구매와 동시에 선불로 과금되며, 부가세 10%는 별도입니다.<br>
+							   결제 시 SMS 등을 통한 별도의 거래 내역 통지는 생략됩니다.<br>
+							   구매하신 티켓의 결제 내역 조회, 해지는 [망고 웹사이트 &gt; 결제 &gt; 주문 내역]에서 할 수 있습니다.<br>
+							   티켓 환불 신청은 망고 고객센터(1577-1234)로 전화하거나,<br>
+							   [망고 웹사이트 &gt; 게시판 &gt; 1:1 문의]에서 할 수 있습니다.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="sidebar">
+						<div class="searh-form">
+							<h4 class="sb-title">결제상세</h4>
+							
+							<!--결제정보 저장공간 폼-->
+							<form class="form-style-1" name="payment_form" action="#">
+								<input type="hidden" id="user_id" name="userId" th:value="${user_id}">
+								<input type="hidden" name="ticketName" th:value="${ticketName}">								
+								<input type="hidden" name="ticketImage" th:value="${ticketImage}" >								
+								<input type="hidden" name="ticketContent" th:value="${ticketContent}">								
+								<input type="hidden" name="ticketStar" th:value="${ticketStar}">								
+								<input type="hidden" name="ticketAddress" th:value="${ticketAddress}">								
+								<input type="hidden" name="ticketDate" th:value="${ticketDate}">		
+								<input type="hidden" name="ticketArtist" th:value="${ticketArtist}">		
+								<input type="hidden" name="ticketStock" th:value="${ticketStock}">		
+								<input type="hidden" name="ticketNo" th:value="${ticketNo}">		
+								<input type="hidden" name="ticketPrice" th:value="${ticketPrice}">		
+								
+								<div class="row">
+									<div class="col-md-12 form-it">
+										<label>티켓명</label>
+										<input type="text" th:placeholder="${ticketName}">
+									</div>
+									<div class="col-md-12 form-it">
+										<label>쿠폰선택</label>
+										<div class="group-ip">
+											<select name="skills" class="ui fluid dropdown" id="couponSelect">
+												<option value="">쿠폰을 선택하세요</option>
+												<option value="Action1" th:each="couponDto : ${couponDtoList}" th:text="${couponDto.couponName}"
+													th:value="${couponDto.couponDiscount}">
+												</option>
+											</select>
+										</div>
+										</div>
+									<div class="col-md-12 form-it">
+									<div class="row">
+										<div class="col-md-6">
+											<label>상품금액</label>
+											<input type="text" id="formattedOrderPrice" th:placeholder="${formattedOrderPrice}+'원'">
+										</div>
+										<div class="col-md-6">
+											<label>쿠폰할인</label>
+											<input type="text" id="discountInput" placeholder="">
+										</div>
+									</div>
+									</div>
+									<div class="col-md-12 form-it">
+									<label>총 결제금액(VAT 별도)</label>
+									<input type="text" id="endPrice" th:placeholder="${formattedOrderPrice}+'원'">
+									</div>
+									<div class="col-md-12 form-it"
+										style="display: flex; align-items: center; margin-bottom: 5px;">
+										<input type="checkbox" id="termsAgree1" name="termsAgree1"
+											style="width: 16px; height: 16px; margin-right: 10px; margin-bottom: 0;">
+										<label for="termsAgree1" style="margin-bottom: 0;">유의사항을 확인하였습니다.</label>
+									</div>
+									<div class="col-md-12 form-it"
+										style="display: flex; align-items: center; margin-bottom: 5px;">
+										<input type="checkbox" id="termsAgree2" name="termsAgree2"
+											style="width: 16px; height: 16px; margin-right: 10px; margin-bottom: 0;">
+										<label for="termsAgree2" style="margin-bottom: 0;">이용약관을 확인하였습니다.</label>
+										<button id="showPopupButton" class="navy-button">이용약관 보기</button>
+									</div>
+									<div class="col-md-12 ">
+										<input id="paymentButton" class="submit" value="결제하기">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+	
+</body>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+
+<script>
+
+
+	/*결제하기 버튼 누를시 이용약관, 유의사항 체크박스에 체크가 되어있는지 모니터링 하는 함수*/
+
+
+	const checkbox1 = document.getElementById("termsAgree1");
+	const checkbox2 = document.getElementById("termsAgree2");
+	const paymentButton = document.querySelector(".submit");
+
+	checkbox1.addEventListener("change", checkAndWarn);
+	checkbox2.addEventListener("change", checkAndWarn);
+	paymentButton.addEventListener("click", checkAndWarn);
+
+	function checkAndWarn() {
+		if (paymentButton === document.activeElement) {
+			if (!checkbox1.checked && !checkbox2.checked) {
+				alert("유의사항과 이용약관을 확인해주세요.");
+			} else if (!checkbox1.checked) {
+				alert("유의사항을 확인해주세요.");
+			} else if (!checkbox2.checked) {
+				alert("이용약관을 확인해주세요.");
+			} else {
+				//체크박스 검사 통과후 결제 함수 실행!
+				paymentFunction();
+			}
+		}
+	}
+	
+	
+	
+	
+	function paymentFunction() {
+
+		/* 결제하기 버튼을 클릭했을 때 실행되는 결제 함수(현대적인 방법의 ajax = 순수 자바스크립트로만 쓰임, 제이쿼리 X) */
+
+		// endPrice 가져오기
+		var formattedOrderPriceElement = document.getElementById('formattedOrderPrice');
+		var endPriceElement = document.getElementById('endPrice');
+		var formattedOrderPrice = parseFloat(formattedOrderPriceElement.value);
+		var endPrice = parseFloat(endPriceElement.value);
+
+		// userId 가져오기
+		var userIdElement = document.getElementById("user_id");
+		var userId = userIdElement.value;
+
+		// AJAX 요청을 보낼 URL 및 데이터 설정
+		// 결제 처리를 수행하는 서버 엔드포인트 URL (OrderRestController의 createOrder 메소드 주소)
+		var url = '/2023-05-JAVA-DEVELOPER-final-project-team1-mango/order/create';
+
+		// order_membership.html의 body 내용 안에 저장한 결제정보 저장공간 폼 사용
+		var payment_form = document.payment_form;
+
+		var requestData = {
+			orderId: 0,
+			orderPrice: endPrice,
+			orderStatus: "결제완료",
+			userId: userId,
+			orderItemDtos: [
+				{
+					"oiId": 0,
+					"oiQty": 1,
+					"productName": payment_form.ticketName.value,
+					"productImage": payment_form.ticketImage.value,
+					"productPrice": payment_form.ticketPrice.value,
+					"productContent": payment_form.ticketContent.value,
+					"productNo": payment_form.ticketNo.value,
+					"orderId": 0
+				}
+			],
+		};
+		console.log(requestData);
+
+		// AJAX 요청 보내기
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', url, true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					// 결제가 성공적으로 완료될 경우 실행할 코드
+					var response = JSON.parse(xhr.responseText);
+					alert('주문이 성공적으로 완료되었습니다.');
+					alert('무통장입금 신한은행 110-354-123456\n1시간 내 미입금시 주문이 취소됩니다.');
+					//requestDeleteCoupon(couponId);
+					
+					//redirect
+            		window.location.replace('order_history');
+            		
+				} else {
+					// 결제가 실패한 경우 실행할 코드
+					alert('주문에 실패하였습니다.');
+				}
+			}
+		};
+
+		xhr.send(JSON.stringify(requestData)); // 요청 데이터를 JSON 문자열로 변환하여 보냅니다.
+	}
+
+		
+	/*이용약관 팝업*/	
+	
+	
+	document.getElementById('showPopupButton').addEventListener('click', function () {
+		
+		var width = 700; // 팝업 창 너비
+		var height = 700; // 팝업 창 높이
+		var left = (window.innerWidth - width) / 2; // 팝업 창을 가로로 중앙에 위치
+		var top = (window.innerHeight - height) / 2; // 팝업 창을 세로로 중앙에 위치
+	
+		var popupWindow = window.open('', '이용약관', 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+		var popupDocument = popupWindow.document;
+	
+		popupDocument.write('<html><head><title>망고뮤직</title></head><body>');
+		popupDocument.write('<div class="popup-content" style="height: 100%; overflow: scroll;">');
+	
+		// iframe를 사용하여 PDF 파일을 엽니다.
+		popupDocument.write('<iframe src="terms-of-use.pdf" style="width: 100%; height: 100%; border: none;"></iframe>');
+	
+		popupDocument.write('</div>');
+		popupDocument.write('</body></html>');
+	
+		popupDocument.close();
+		
+	});
+	
+	
+	/*쿠폰 선택시 쿠폰 value 값을 받아와서 아래 바에서 쿠폰 해당 value 반환 (Javascript) 성공*/
+	
+		
+	document.getElementById('couponSelect').addEventListener('change', function () {
+
+		var selectedCouponDiscount = parseFloat(this.value); // 선택한 쿠폰의 할인율을 가져옴
+	
+		// 소수점 아래 자릿수를 절사
+		selectedCouponDiscount = selectedCouponDiscount.toFixed(0);
+	
+		// 할인율을 플레이스홀더로 업데이트
+		var discountInput = document.getElementById('discountInput');
+		discountInput.placeholder = selectedCouponDiscount + ' %';
+	
+	});
+	
+		
+	/*선택된 쿠폰 할인율을 받아서 총금액에 할인 반영해서 최종금액 돌려주기 (Javascript) 성공*/
+
+
+	var originalPrice = parseFloat(document.getElementById('formattedOrderPrice').placeholder); // 오리지널 가격 가져오기
+	var currentDiscountedPrice = originalPrice; // 현재 쿠폰 할인된 가격
+	
+	// 페이지 로드 시 초기 값으로 설정
+	window.addEventListener('load', function () {
+		var endPriceElement = document.getElementById('endPrice');
+		endPriceElement.value = currentDiscountedPrice.toFixed(0) + ' 원';
+	});
+	
+	
+	document.getElementById('couponSelect').addEventListener('change', function () {
+		// 선택한 쿠폰의 할인율을 가져옴
+		var selectedCouponValue = parseFloat(this.value);
+
+		// endPriceElement 정의
+		var endPriceElement = document.getElementById('endPrice');
+
+		// 현재 쿠폰 할인을 초기화
+		currentDiscountedPrice = originalPrice;
+
+		// 새로운 쿠폰 할인을 계산
+		var discountPercentage = selectedCouponValue / 100;
+		currentDiscountedPrice = currentDiscountedPrice * (1 - discountPercentage);
+
+		// endPrice 업데이트
+		endPriceElement.value = currentDiscountedPrice.toFixed(0) + ' 원'; // 총 결제금액 업데이트
+		
+	});
+	
+	
+	/*결제에 사용된 쿠폰 삭제*/
+	
+	/*
+	var couponSelect = document.getElementById("couponSelect");
+	var selectedOption = couponSelect.options[couponSelect.selectedIndex];
+	var couponId = selectedOption.getAttribute("data-coupon-id"); // 선택된 옵션의 data-coupon-id 속성 값
+
+
+	function requestDeleteCoupon(couponId) {
+		var deleteCouponUrl = '/2023-05-JAVA-DEVELOPER-final-project-team1-mango/coupon/delete/'+couponId;
+
+		var deleteXhr = new XMLHttpRequest();
+		deleteXhr.open('DELETE', deleteCouponUrl, true);
+
+		deleteXhr.onreadystatechange = function () {
+			if (deleteXhr.readyState === 4) {
+				if (deleteXhr.status === 200) {
+					// 쿠폰 삭제가 성공적으로 완료될 경우 실행할 코드
+					alert('쿠폰이 사용되었습니다.');
+				} else {
+					// 쿠폰 삭제가 실패한 경우 실행할 코드
+					alert('쿠폰이 사용되지 않습니다.');
+				}
+			}
+		};
+
+		deleteXhr.send();
+	}
+	*/
+	
+	
+	//쿠폰선택시 data-coupon-id 값으로 couponId가 잘 들어오는지 확인하는 방법
+	
+	/*
+	var couponSelect = document.getElementById("couponSelect");
+
+	couponSelect.addEventListener("change", function () {
+		
+		var selectedOption = this.options[this.selectedIndex];
+		var couponId = selectedOption.getAttribute("data-coupon-id");
+
+		if (couponId !== null) {
+			// 선택한 옵션의 data-coupon-id 값이 존재할 때
+			console.log("선택된 쿠폰 ID:" + couponId);
+		} else {
+			// 선택한 옵션의 data-coupon-id 값이 존재하지 않을 때
+			console.log("선택된 쿠폰 ID가 없습니다.");
+		}
+		
+	});
+	*/
+	
+
+
+</script>
+
+
+</html>

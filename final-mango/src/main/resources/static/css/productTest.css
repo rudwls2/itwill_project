@@ -1,0 +1,25 @@
+
+.musicBackground {
+	
+    height: 398px;
+	background-color:#020d18;
+}
+
+a#topBtn {
+	position: fixed;
+	/* 포지션 고정 */
+	right: 3%;
+	/* 오른쪽에서 2% */
+	bottom: 20px;
+	/* 밑에서 5px */
+	display: none;
+	/* 보여지지 없음 - 기본적으로 안보여지게 */
+	z-index: 9999;
+	/* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */
+}
+
+.replyTemp {
+	margin-top: 90px;
+	margin-bottom: 50px;
+	
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+	<div th:insert="~{common_header :: headerFragment}"></div>
+
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="blog-detail-ct">
+						<div class="flex-it share-tag"></div>
+						<h1 th:text="${board.boardTitle}">title</h1>
+						<h4>작성자 : <span th:text="${board.getUser().getUserId()}">id</span></h4>
+
+						</br>
+						<h4 th:text="${board.boardCategory.boardCategoryName + ' - ' + board.boardType.boardTypeTitle}">
+						</h4>
+
+						</br>
+
+						<p>작성일 : <span th:text="${#temporals.format(board.createdTime, 'yyyy-MM-dd HH:mm')}"> </span>
+						</p>
+
+						<div id="boardId" th:text="${board.boardId}" style="display: none;">게시글 ID</div>
+
+						<pre th:utext="${board.boardContent}" style="border: 2px solid rgb(2, 15, 25); line-height: 20px; margin-top: 50px; 
+							color: rgb(255, 255, 255); height: 200px ; width: 1000px;  overflow: auto;"></pre>
+
+
+
+						<div class="flex-it share-tag"></div>
+
+
+						<div class="comments">
+							<h4 th:text="${ReplyList.size()} + ' 개의 댓글'">04 Comments</h4>
+
+							<div th:each="ReplyList : ${ReplyList}">
+								<div class="cmt-item flex-it">
+									<img src="images/uploads/author.png" alt="">
+									<div class="author-infor">
+										<div class="flex-it2">
+											<!--Name으로 체인지 가능-userinfo-->
+											<h6 th:text="'작성자 : '+${ReplyList.getUser.getUserName}"
+												style="color: white; font-size: 20px;"><a href="#">Steve Perry</a></h6>
+											<span class="time"
+												th:text="${#temporals.format(ReplyList.createDateTime, 'yyyy-MM-dd HH:mm')}">
+												27 Mar 2017</span>
+										</div>
+										<p th:text="${ReplyList.BoardReplyContent}"></p>
+
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="comment-form">
+							<h4>댓글쓰기</h4>
+							<form action="">
+								<div class="row">
+									<div class="col-md-4">
+										<input type="text" id="comment_id" placeholder="작성자 이름"
+											th:value="${userIdString}">
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<textarea name="message" id="comment_content"
+											placeholder="건전한 댓글문화를 위해 최소 60글자의 댓글을입력해주세요"
+											style="font-size: 20px;"></textarea>
+									</div>
+								</div>
+								<input class="submit" type="button" value="댓글달기" onclick="create_reply()">
+							</form>
+						</div>
+
+
+
+						<div class="comment-form">
+							<div class="dropdown-container">
+								<div class="row">
+									<div class="col-md-6">
+										<form action="">
+											<input class="submit" type="button" value="수정하기"
+												onclick="update_edit_form()" style="margin-left: 250px;">
+										</form>
+									</div>
+									<div class="col-md-6">
+										<form id="deleteForm">
+											<input class="submit" value="삭제하기" type="button" onclick="deleteForms()"
+												style="margin-left: 10%;">
+										</form>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-sm-12 col-xs-12">
+		<div class="sidebar">
+			<div class="sb-cate sb-it"></div>
+			<div class="sb-recentpost sb-it"></div>
+			<div class="sb-tags sb-it"></div>
+		</div>
+	</div>
+
+
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+</body>
+
+<script>
+
+
+	function create_reply() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const boardId = urlParams.get("boardId");
+		const boardIdInt = parseInt(boardId, 10); //boardId
+
+		var commentContent = $("#comment_content").val()
+		console.log(commentContent);
+
+		var commentId = $("#comment_id").val();
+		console.log(commentId);
+
+		const commentData = {
+			"boardReplyTitle": "댓글타이틀",
+			"boardReplyContent": commentContent,
+			"boardId": boardIdInt,
+			"userId": commentId //세션처리 아이디넣으면 자동으로 이름들어옴
+		}
+		console.log(commentData);
+		fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_reply_create/${boardId}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(commentData)
+		})
+			.then(response => {
+				if (response.status === 201) {
+					alert('댓글 등록되었습니다.');
+					location.reload(); // 현재 페이지를 새로 고침
+
+				} else {
+					alert('댓글 등록에 실패했습니다.');
+					alert('에러 발생: ' + error);
+
+				}
+			})
+			.catch(error => {
+				alert('에러 발생: ' + error);
+			});
+
+
+	}
+
+
+
+
+	function deleteForms() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const boardId = urlParams.get("boardId");
+		const boardIdInt = parseInt(boardId, 10);
+
+		fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_delete/${boardIdInt}`, {
+			method: "DELETE",
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					alert("게시글이 삭제되었습니다.");
+					alert("메인으로 이동합니다.");
+					window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_notification";
+				} else {
+					alert("게시글 삭제에 실패했습니다.");
+				}
+			})
+			.catch((error) => {
+				alert("에러발생.")
+				console.error("에러:", error);
+			})
+			.finally(() => {
+				// 비활성화된 버튼을 활성화
+				deleteButton.disabled = false;
+			});
+
+	}
+	//수정하기폼으로 이동
+	function update_edit_form() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const boardId = urlParams.get("boardId");
+		const boardIdInt = parseInt(boardId, 10);
+
+		window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_detail_edit?boardId=" + boardIdInt;
+	}
+
+
+
+
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+
+</html>

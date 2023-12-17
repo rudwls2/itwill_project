@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango>1대1문의</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+	<div th:insert="~{common_header :: headerFragment}">
+	</div>
+
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="topbar-filter">
+						<p class="pad-change"
+							th:text="${inquiries[0].getUser().getUserName + '님의 문의사항은 ' + inquiries.size() + '개입니다'}">
+							userName님의 문의 총 <span>N</span> 개 입니다</p>
+						<label>Sort by:</label>
+						<select id="sortSelect">
+							<option value="latest">최신순</option>
+							<option value="oldest">오래된순</option>
+						</select>
+					</div>
+
+					<div class="row">
+						<div class="row" id="inquiriesContainer">
+							<div th:each="inquiries : ${inquiries}">
+
+								<div class="ceb-item-style-2">
+									<div class="ceb-infor">
+										<h2>
+
+											<a th:href="@{/board_other_detail1(boardId=${inquiries.boardId})}" th:text="${inquiries.boardTitle}">로그인</a>
+										</h2>
+										<p th:text="${#temporals.format(inquiries.createdTime, 'yyyy-MM-dd HH:mm')}">
+										</p>
+										
+
+										<p th:text="${inquiries.boardType.boardTypeTitle}">회원가입했는데 로그인이안되요...</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+					</div>
+				</div>
+
+
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="sidebar">
+						<div class="sb-search sb-it">
+							<h4 class="sb-title">Search Title</h4><input type="text" id="searchInput" placeholder="Enter keywords">
+						</div>
+
+
+						<div class="searh-form">
+							<form class="form-style-1 celebrity-form" action="board_write">
+								<div class="row">
+									<div class="col-md-12 "><input class="submit" type="submit" value="작성하기">
+									</div>
+								</div>
+							</form>
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- end of celebrity list section--><!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div>
+
+
+</body>
+		<script>
+			var sessionUserId = '<%=(String)session.getAttribute(userIdString)%>';
+			console.log(sessionUserId)
+		</script>
+		
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/board.js"></script>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango>주문내역</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style11.css">
+	<style>
+		.movie-item-style-3 {
+			display: -webkit-flex;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			overflow: hidden;
+			margin-bottom: 30px;
+			  width: 90%;
+		}
+
+		
+	</style>
+	
+</head>
+
+<body><!--preloading-->
+<div th:insert="~{common_header :: headerFragment}"></div>
+
+	 
+	<!--최신순, 오래된순-->		
+
+
+	<div class="page-single movie_list">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<div class="topbar-filter">
+						
+						<p>
+							<a th:text="${session.sUserId}+'님의'"></a>
+							<!--<span th:text="${#lists.size(orderDtoList)}"></span>-->
+							<span>주문내역</span>
+					 
+						</p>
+						
+						<label>Sort by:</label>
+						<select id="sortSelect">
+				        <option value="newest">최신순</option>
+				        <option value="oldest">오래된순</option>
+					    </select>
+					</div>
+					
+		<!--주문내역-->	
+    
+			<div class="row" id="orderHistory">
+		
+        <div th:each="order, iterStat: ${orderDtoList}">
+        <div th:each="orderitem, iterStat: ${order.orderItemDtos}">
+			
+		<div class="e">
+		<div class="movie-item-style-2" style="margin-left: 50px;">
+		<!-- <img th:src="@{'images/' + ${orderitem.productImage}}" alt="">-->
+		 <img th:src="${orderitem.productImage}" alt="" >
+   		 <div class="mv-item-infor">
+            <h6>
+                <a th:text="'주문번호:  '+${order.orderId}"></a>
+        	     <!--삭제버튼-->
+                <button th:class="deleteButton" th:data-order-id="${order.orderId}">x</button>
+          
+            </h6>
+                <p class="rate">
+					<span th:text = "'주문상태: '+${order.orderStatus}"></span><br>
+					<span th:text="'결제금액: '+${order.orderPrice + ' 원'}"></span><br>
+					<span th:text="${'구매일시: '+ #temporals.format(order.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></span><br>
+					<span th:text="'배송지: ' + ${user.userAddress}"></span>
+                </p>
+                <p class="describe">
+			   	</p>
+                <p>Order Item</p>
+                <!--주문아이템 정보-->
+					<div class="rate" style="display: flex; align-items: center; max-width: 350px; padding-bottom: 15px;">
+						<img th:src="${orderitem.productImage}" style="max-width: 100%; max-height: 100%; margin-right: 10px;">
+						<div>
+							<p class="rate">상품이름 : <span th:text="${orderitem.productName}"></span></p>
+							<p class="rate">상품가격 : <span th:text="${orderitem.productPrice}+' 원'"></span></p>
+							<p class="rate">수량 : <span th:text="${orderitem.oiQty}"></span></p>
+						</div>
+					</div>
+                <!-- -->
+         		
+           
+            <p>⚠️ 환불불가 상품입니다.</p>
+            <p>결제 내역 및 취소 요청, 그 외 상세 정보는 <a href="board_inquiries">고객센터</a>로 문의해주세요.</p>
+		   <!-- item start-->
+		 <!-- <div class="movie-item-style-2 movie-item-style-3" th:each="orderItemDto, iterStat: ${order.orderItemDtos}" style="margin-top: 20px;" >
+							<a style="padding-right: 20px; color: #ffffff;
+									    padding-left:0px;
+									    margin-bottom: 0px;
+									    border-bottom-width: 10px;
+									    margin-top: 20px;"
+									    ></a>
+                                <img th:src="@{'images/' + ${orderItemDto.productImage}}" alt="" style="width: 70px">
+                                <img th:src="${orderItemDto.productImage}" alt="" style="width: 70px">
+                                
+                                </a>
+                                <div class="mv-item-infor">
+                           
+                                
+                               <p class="rate">상품이름 : <span th:text="${orderItemDto.productName}"></span></p>
+                                <p class="rate">상품가격 : <span th:text="${orderItemDto.productPrice}+' 원'"></span></p>
+                                <p class="rate">수량 : <span th:text="${orderItemDto.oiQty}"></span></p>
+                            
+                            
+                        </div>
+                        </div>-->
+		   <!-- item end   -->
+        				</div>
+        
+    				</div>
+				</div>
+			</div>
+</div>
+
+
+					
+				<!--</div>
+					<div class="sidebar">
+					<div class="ads2">
+						<p>🎦광고</p>
+						<img src="images/aespa.png" alt=""></div>
+						</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+	
+</body>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/order.js"></script>
+	
+</html>

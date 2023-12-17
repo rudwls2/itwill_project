@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Mango MusicAward</title>
+<link rel="stylesheet" href="css/voteMain.css" type="text/css">
+<style>
+@import	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+</style>
+
+<script src="js/vote.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+<body>
+
+	<!-- 상 이름 리스트 -->
+	
+
+
+	<div class="awardList" >
+	<a class="logo" href="index"> <img src="images/mango_logo2.png" height="40px"></a>
+		
+		<div id="menu">
+			<ul>		
+				<li><a href="#">주간 인기상</a>
+					<ul>
+						<li><a href="#" onclick="voteEnd()">11월 1주</a></li>
+						<li><a href="productVote">11월 2주</a></li>
+						<li><a href="#" onclick="votePreparing()">11월 3주</a></li>
+						<li><a href="#" onclick="votePreparing()">11월 4주</a></li>
+					</ul>
+				</li>
+
+				<li><a href="#">월간 인기상</a>
+					<ul>
+						<li><a href="#" onclick="voteEnd()">9월</a></li>
+						<li><a href="#" onclick="voteEnd()">10월</a></li>
+						<li><a href="#" onclick="votePreparing()">11월</a></li>
+					</ul>
+				</li>
+				
+				<li><a href="#">히스토리</a>
+					<ul>
+						<li><a href="bestAward">베스트상</a></li>
+						<li><a href="specialAward">특별상</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+	<div class="login"> 
+    <ul>
+        <li th:if="${loginUser == null}">
+            <a href="user_login_form">로그인</a>
+        </li>
+        <li th:if="${loginUser != null}">
+            <a href="user_logout_action" th:text="${loginUser.userId + ' 님 로그아웃'}">로그아웃</a>
+        </li>
+        <li th:if="${loginUser == null}">
+        <a href="user_write_form">회원가입</a>
+        </li>
+    </ul>
+</div>
+
+</div>	
+
+	<!-- 상 이름 리스트-->
+
+	<!-- 각 월 선택-->
+	
+	<!-- 각 월 선택 종료-->
+
+
+
+	<!-- show_Vote_Summary >> 투표 주차 및 남은시간 전체 -->
+	<div class="show_Vote_Summary">
+		<!-- 투표 주차 안내-->
+		<div class="area">
+			<div class="sec-title">
+				<h2>
+					<p>
+					<span class="term_month_no">11</span> <span class="term_month_text">월</span>
+					<span class="term_week_no">2</span> <span class="term_week_text">주차</span>
+					</p>
+					<p style="margin-top: 0px; font-size:35px;">Mango 인기상 투표시작</p>
+				</h2>
+			</div>
+		</div>
+		<!-- 투표 주차 안내 종료-->
+
+
+		<!-- 남은 시간 안내 __>  js로 날짜 카운트 구현할 예정-->
+
+		<div class="area">
+			<div class="voteInfo-area">
+				
+				
+				<div class="col-closing-time">
+				   <a class="time-title">남은 시간</a>
+						<div class="countdown">
+							<div id="countdown-timer">
+								<span id="days">0</span>일
+								<span id="hours">0</span>시간
+								<span id="minutes">0</span>분
+								<span id="seconds">0</span>초
+							</div>
+						</div>
+				</div>
+				
+
+				<div class="col-participate">
+					<a>투표수</a>
+					<div class="voteTot">
+                        <span th:text="${totalVotes}"></span>
+                    </div>
+				</div>
+				
+			</div>
+				
+		</div>
+		<!-- 남은 시간 안내 __>  js로 날짜 카운트 구현할 예정-->
+	</div>
+
+	<!-- 1위 2위 배틀 -->
+	<div class="battle">
+		
+		
+		<div class="battle_img_left" th:each="top1Product : ${top1Product}">
+			<img th:src="${top1Product.productImage}">
+			<h1>
+				1위 <a class="battle_left_name" th:text="${top1Product.productArtist}">임영웅</a> 
+				 <a id="Rank1_Tot_percentage" th:text="${top1Productpercentage + '%'}">59</a>
+			</h1>
+			<div class="battle_totPercent">
+				<a th:text="${top1Product.productName}">노래제목</a> 
+				<a id="Rank1_Tot" th:text="${top1Product.voteTot}">11,501</a> 
+				<a id="Rank1_Tot_text">득표</a>
+		</div>
+
+
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top1Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		
+		
+		</div>
+		<h3 class="vs">VS</h3>
+
+
+		<div class="battle_img_right" th:each="top2Product : ${top2Product}">
+			<img th:src="${top2Product.productImage}">
+			<h1>
+				2위 <a class="battle_right_name" th:text="${top2Product.productArtist}">정국</a> 
+					<a id="Rank2_Tot_percentage" th:text="${top2Productpercentage + '%'}">57%</a>
+			</h1>
+			<div class="battle_totPercent">
+				<a th:text="${top2Product.productName}">노래제목</a> 
+				<a id="Rank1_Tot" th:text="${top2Product.voteTot}">11,501</a> 
+				<a id="Rank1_Tot_text">득표</a>
+			</div>
+
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top2Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+	</div>
+
+	<!-- 1위 2위 배틀종료-->
+
+
+
+	<!-- 1위~10위 시작-->
+	<div class="battle_list">
+
+
+		<div class="battle_rank" th:each="top1Product : ${top1Product}">
+			<img th:src="${top1Product.productImage}">
+			<h1>
+				1위 <a class="battle_1st_name" th:text="${top1Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top1Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top1Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top1Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top1Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		
+		
+		<div class="battle_rank" th:each="top2Product : ${top2Product}">
+			<img th:src="${top2Product.productImage}">
+			<h1>
+				2위 <a class="battle_1st_name" th:text="${top2Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top2Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top2Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top2Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top2Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		
+		<div class="battle_rank" th:each="top3Product : ${top3Product}">
+			<img th:src="${top3Product.productImage}">
+			<h1>
+				3위 <a class="battle_1st_name" th:text="${top3Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top3Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top3Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top3Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top3Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		
+		<div class="battle_rank" th:each="top4Product : ${top4Product}">
+			<img th:src="${top4Product.productImage}">
+			<h1>
+				4위 <a class="battle_1st_name" th:text="${top4Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top4Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top4Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top4Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top4Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		<div class="battle_rank" th:each="top5Product : ${top5Product}">
+			<img th:src="${top5Product.productImage}">
+			<h1>
+				5위 <a class="battle_1st_name" th:text="${top5Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top5Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top5Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top5Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top5Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		<div class="battle_rank" th:each="top6Product : ${top6Product}">
+			<img th:src="${top6Product.productImage}">
+			<h1>
+				6위 <a class="battle_1st_name" th:text="${top6Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top6Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top6Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top6Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+		<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top6Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		
+		<div class="battle_rank" th:each="top7Product : ${top7Product}">
+			<img th:src="${top7Product.productImage}">
+			<h1>
+				7위 <a class="battle_1st_name" th:text="${top7Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top7Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top7Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top7Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top7Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		
+		
+		<div class="battle_rank" th:each="top8Product : ${top8Product}">
+			<img th:src="${top8Product.productImage}">
+			<h1>
+				8위 <a class="battle_1st_name" th:text="${top8Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top8Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top8Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top8Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top8Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		
+		
+		<div class="battle_rank" th:each="top9Product : ${top9Product}">
+			<img th:src="${top9Product.productImage}">
+			<h1>
+				9위 <a class="battle_1st_name" th:text="${top9Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top9Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top9Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top9Productpercentage + '%'}">70%</a>
+				</div>
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+			<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top9Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+		
+		
+		
+		
+		<div class="battle_rank" th:each="top10Product : ${top10Product}">
+			<img th:src="${top10Product.productImage}">
+			<h1>
+				10위 <a class="battle_1st_name" th:text="${top10Product.productArtist}">임영웅</a>
+			</h1>
+			<div class="battle_list_nameTot">
+				<img src="https://cdn.icon-icons.com/icons2/1302/PNG/512/multimediamusicplayerplaybutton_85798.png" style="size: 10px;width: 30px;height: 30px;margin-top: 20px;">
+				<a style="text-align:left;width: 200px;margin-top: 20px;" th:text="${top10Product.productName}">노래제목</a>
+				<div id="tot">
+				<a style="text-align:center;" th:text="${top10Product.voteTot}">11,501</a> 
+				<a style="font-size: 20px;">득표</a>
+				<a th:text="${top10Productpercentage + '%'}">70%</a>
+				</div>
+				
+			</div>
+				<div class="vote_percentage-bar">
+				
+				<div class="percentage-bar">
+					<div class="percentage1"></div>
+				</div>
+			</div>
+			
+		<th:block th:if="${ not #strings.isEmpty(loginUser)}">
+				<button
+					class="choose-btn" onclick="voteButtonClicked(this)"
+					th:attr="data-voteid=${top10Product.voteId}, data-userid=${loginUser.userId}">투표하기</button>
+			</th:block>
+			
+			<th:block th:unless="${ not #strings.isEmpty(loginUser)}">
+				<button 
+					class="choose-btn" onclick="voteButtonClicked(this)">투표하기</button>
+			</th:block>
+		</div>
+		
+	</div>
+	<!-- 1위~20위 종료-->
+
+	<div>
+
+
+	</div>
+
+
+
+</body>
+</html>

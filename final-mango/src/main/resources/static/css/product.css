@@ -1,0 +1,29 @@
+.music_List {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 두 개의 열, 각 열은 같은 너비 */
+    grid-template-rows: auto; /* 행 높이 자동 조절 */
+    gap: 10px; /* 열과 행 사이의 간격 조절 */
+}
+
+/*/////////////////////////GOODS LIST/////////////////////////*/
+.red-text {
+    color: palegoldenrod;
+}
+.celebrity-items3 {
+    flex: 0 0 calc(33.33% - 5px); /* Adjusted width and reduced margin */
+    margin-right: 5px; /* Reduced margin between items */
+    }
+.ceb-infor {
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    margin: 0 auto; /* 요소를 수평 가운데 정렬 */
+}
+.ceb-item {
+    text-align: center; /* 텍스트를 가운데 정렬 */
+    margin: 0 auto; /* 요소를 수평 가운데 정렬 */
+}
+
+/* 각 그룹의 마지막 아이템에 오른쪽 여백을 제거 */
+/*.celebrity-items .ceb-item-group-end .ceb-item:last-child {
+    margin-right: 0;
+}*/
+/*//////////////////////////////////////////////////////////////////*/

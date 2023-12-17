@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<!-- Google Font -->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body style="background-color: #020D18;">
+	<!--preloading-->
+	<div th:insert="~{common_header :: headerFragment}"></div>
+
+	<!-- BEGIN | Header -->
+	<header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom"></nav>
+	</header>
+
+	<div id="admin_container" style="display: grid; grid-template-columns: 200px 1fr;">
+
+		<!-- 관리자 페이지 사이드바 시작 -->
+		<div id="admin_menu">
+			<ul>
+				<li class="accordion"><a href="admin">회원</a>
+				<li class="accordion"><a href="admin_music">상품</a>
+					<ul class="submenu">
+						<li><a href="admin_music">음악</a></li>
+						<li><a href="admin_goods">굿즈</a></li>
+						<li><a href="admin_ticket">티켓</a></li>
+					</ul>
+				</li>
+				<li class="accordion"><a href="admin_Board">게시판</a>
+					<ul class="submenu">
+						<li><a href="#">공지사항</a></li>
+						<li><a href="#">Q&A</a></li>
+						<li><a href="#">1대1문의</a></li>
+					</ul>
+				</li>
+				<li class="accordion"><a href="#">기타기능</a>
+					<ul class="submenu">
+						<li><a href="#">투표</a></li>
+						<li><a href="#">결제</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- 관리자 페이지 사이드바 종료 -->
+
+		<!-- 유저 테이블 시작 -->
+		<div class="content" style="color: white; padding: 20px;">
+			<h1 style="margin-left: 600px; margin-bottom: 100px; margin-top: 20px;">회원 목록</h1>
+			<button id="loadUserListButton" style="color: black;">회원리스트 불러오기</button>
+			<table>
+				<tr style="font-size: 20px; color: lightpink;">
+					<td style=" width: 43px;"><input type="checkbox"></td>
+					<td style="width: 10%;">아이디</td>
+					<td>비밀번호</td>
+					<td style="width: 5%;">이름</td>
+					<td style="width: 20%;">주소</td>
+					<td>이메일</td>
+					<td style="width: 15%;">주민번호</td>
+					<td>전화번호</td>
+					<td style="width: 5%;">성별</td>
+					<td style="width: 8%;">멤버쉽</td>
+				</tr>
+
+				<tr th:each="user : ${users}">
+					<td><input type="checkbox" /></td>
+					<td th:text="${user.userId}">아이디</td>
+					<td th:text="${user.userPw}">비밀번호</td>
+					<td th:text="${user.userName}">이름</td>
+					<td th:text="${user.userAddress}">주소</td>
+					<td th:text="${user.userEmail}">이메일</td>
+					<td th:text="${user.userJumin}">주민번호</td>
+					<td th:text="${user.userPhone}">전화번호</td>
+					<td th:text="${user.userGender}">성별</td>
+					<td th:text="${user.memberShip}">멤버쉽</td>
+				</tr>
+			</table>
+
+			<button id="user_deleteButton" style="margin-top: 20px; color: black; margin-left: 600px;">삭제하기</button>
+			<button id="user_updateButton" style="margin-top: 20px; color: black; margin-left: 50px;">수정하기</button>
+		</div>
+		<!-- 유저 테이블 종료 -->
+
+
+	</div>
+
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+	<!-- end of footer section-->
+
+	<script>
+		function updateTable(data) {
+			// 이 부분에서 테이블을 갱신하는 로직을 추가하세요.
+			// 예를 들어, 테이블의 tbody를 찾아서 데이터를 반영할 수 있습니다.
+			var tbody = $("table tbody");
+
+			// 각 사용자에 대한 데이터를 테이블에 추가
+			for (var i = 0; i < data.length; i++) {
+				var user = data[i];
+				var row = $("<tr></tr>");
+
+				// 각 필드에 대한 데이터 표시
+				row.append("<td><input type='checkbox' /></td>");
+				row.append("<td>" + user.userId + "</td>");
+				row.append("<td>" + user.userPw + "</td>");
+				row.append("<td>" + user.userName + "</td>");
+				row.append("<td>" + user.userAddress + "</td>");
+				row.append("<td>" + user.userEmail + "</td>");
+				row.append("<td>" + user.userJumin + "</td>");
+				row.append("<td>" + user.userPhone + "</td>");
+				row.append("<td>" + user.userGender + "</td>");
+				row.append("<td>" + user.memberShip + "</td>");
+
+				// 나머지 필드도 유사하게 추가
+				tbody.append(row);
+			}
+		}
+
+		$(document).ready(function () {
+			$("#loadUserListButton").click(function () {
+				// 버튼 클릭 시 서버에 요청을 보냅니다.
+				$.ajax({
+					type: "GET",
+					url: "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/user/list",
+					success: function (data) {
+						console.log(data);
+						updateTable(data); // 테이블 갱신 함수 호출
+					},
+					error: function (error) {
+						// 요청이 실패했을 때 실행되는 코드
+						console.error("Error loading user list:", error);
+					}
+				});
+			});
+		});
+	</script>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/admin.js"></script>
+
+
+</body>
+
+</html>

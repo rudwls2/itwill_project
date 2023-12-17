@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Mango>공지사항</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body><!--preloading-->
+	<div th:insert="~{common_header :: headerFragment}">
+	</div>
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9 col-sm-12 col-xs-12">
+
+					<div class "row" id="notificationContainer">
+
+
+
+						<div th:each="notification : ${notifications}">
+							<div class="blog-item-style-1 blog-item-style-3">
+								<img src="images/uploads/board2.png" alt="">
+								<div class="blog-it-infor">
+									<h3>
+										<a th:href="@{/board_detail(boardId=${notification.boardId})}"
+											th:text="${notification.boardTitle}">MMA2023 개최 안내</a>
+									</h3>
+
+									<span class="time"
+										th:text="${notification.boardType.boardTypeTitle}">2023.10.19</span></br>
+									<span class="time"
+										th:text="${#temporals.format(notification.createdTime, 'yyyy.MM.dd')}">2023.10.19</span>
+									</br>
+									</br>
+									<pre th:utext="${#strings.length(notification.boardContent) &gt; 15 ? notification.boardContent.substring(0, 15) + '...' : notification.boardContent}"
+										style="color: white;"></pre>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="sidebar">
+
+						<div class="sb-search sb-it">
+							<h4 class="sb-title">Search</h4>
+							<input type="text" id="searchInput" placeholder="Enter keywords">
+
+						</div>
+
+
+						<div class="sb-cate sb-it" id="boardTypeList">
+							<h4 class="sb-title">공지사항 분류</h4>
+
+							<ul>
+								<li><a href="#" id="all">전체공지</a></li>
+								<li><a href="#" id="normalCategory"
+										th:text="${boardTypes[1].boardTypeTitle}">일반공지(06)</a></li>
+								<li><a href="#" id="serviceCategory" th:text="${boardTypes[2].boardTypeTitle}">서비스공지
+										(50)</a></li>
+								<li><a href="#" id="systemCategory" th:text="${boardTypes[3].boardTypeTitle}">시스템공지
+										(38)</a></li>
+								<li><a href="#" id="otherCategory" th:text="${boardTypes[0].boardTypeTitle}">기타 (72)</a>
+								</li>
+							</ul>
+						</div>
+
+						<!--userId가 admin일때 보이기 -->
+						<div th:if="${session == null or (userIdString != null and userIdString == 'admin')}"
+							class="searh-form">
+							<form class="form-style-1 celebrity-form"
+								action="/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_write">
+								<div class="row">
+									<div class="col-md-12">
+										<input class="submit" type="submit" value="작성하기">
+									</div>
+								</div>
+							</form>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+
+</body>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/board.js"></script>
+
+</html>

@@ -1,0 +1,364 @@
+
+body{
+  background-color: #F2F2F2;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
+
+/* 상단 메뉴 시작*/
+
+ul li{
+  list-style: none;
+}
+
+#menu {
+  font:bold 20px 'Noto Sans KR', sans-serif;
+  width: auto;
+  height:600px;
+  color:black;
+  line-height: 50px; 
+  margin:0 auto;
+  text-align: center;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
+
+#menu > ul > li {
+  float:left;
+  height: 150px;
+  width:150px;
+  position:relative;
+
+}
+
+#menu > ul > li > ul {
+  width:130px;
+  display:none;
+  position: absolute;
+  font-size:15px;
+  background: rgb(126, 127, 128);
+}
+
+#menu > ul > li:hover > ul {
+  display:block;
+  position:absolute;
+  transition: ease 10s;
+}
+
+#menu a{
+  margin-left: 0px;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+#menu a:hover{
+  display:block;
+  text-align: center;
+  margin-left: 20px;
+  background-color: #FFBB00;
+  width: 100px;
+}
+
+.awardList{
+  font-family: 'Noto Sans KR', sans-serif;
+  width: auto;
+  height: 110px;
+  padding-left: 40px;
+  padding-top: 15px;
+  background-color: #262626;
+  display: grid;
+  grid-template-columns: 100px 1200px 250px;
+}
+
+.logo{
+  line-height: 80px;
+  float: left;
+  
+}
+
+.logo img{
+  vertical-align: middle;
+  padding-top: 10px;
+  height: 70px;
+}
+
+.awardList ul{
+  margin-top: 30px;
+  font-family: 'Noto Sans KR', sans-serif;	
+  float: left;
+
+}
+
+.awardList li{
+  font-family: 'Noto Sans KR', sans-serif;
+  list-style-type: none;
+  float: left;
+  margin-right: 30px;
+  margin-top: 0px;
+  text-align: center;
+}
+
+.awardList a{
+  font-family: 'Noto Sans KR', sans-serif;
+  text-decoration: none;
+  color: white;
+  font-style: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.login{
+  margin-top: 10px;
+  justify-content:start ;
+}
+
+/* 상단 메뉴 종료*/
+
+
+
+
+
+
+
+/* 투표 주차 및 남은시간 전체 시작*/
+.show_Vote_Summary{
+  font-family: 'Noto Sans KR', sans-serif;
+  padding-left: 150px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.area {
+  font-family: 'Noto Sans KR', sans-serif;
+  padding-top: 30px;
+}
+.sec-title p{
+  width: 400px;
+}
+
+
+.voteInfo-area{
+  display: grid;
+  grid-template-columns: 430px 320px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.countdown{
+  font-size: 30px;
+}
+
+.voteTot{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 30px;
+}
+
+/* 투표 주차 및 남은시간 전체 종료*/
+
+
+
+/* 1위 2위 배틀 시작 */
+.battle {
+   display: grid;
+   grid-template-columns: 300px 100px 300px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    position: relative;
+    max-width: 90vw;
+	grid-column-gap: 100px;
+    margin-bottom: 200px;
+    margin-top: 100px;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+.battle img{
+    width: 300px;
+}
+
+.battle_img_left h1{
+  color: #FFBB00;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.battle_img_left a{
+  font-family: 'Noto Sans KR', sans-serif;
+  color: black;
+  font-size: 30px;
+}
+
+.battle_totPercent{
+  display: grid;
+  grid-template-columns: 145px 50px 40px;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: right;
+}
+
+.battle_img_right h1{
+  color: #FFBB00;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.battle_img_right a{
+  font-family: 'Noto Sans KR', sans-serif;
+  color: black;
+  font-size: 30px;
+}
+.battle_totPercent a{
+  color: black;
+  font-size: 20px;
+  
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.battle_left_name{
+text-align: center;
+font-family: 'Noto Sans KR', sans-serif;
+}
+
+.battle_right_name{
+    text-align: center; 
+    font-family: 'Noto Sans KR', sans-serif; 
+}
+
+.battle button{
+    display: block;
+    position: relative;
+    width: 256px;
+    height: 48px;
+    overflow: hidden;
+    font-size: 20px;
+    line-height: 0;
+    border-radius: 20px;
+    margin-left: 15px;
+    margin-top: 10px;
+    border: none;
+    background-color: #FFBB00;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.battle button:active {
+  background-color: rgb(95, 91, 91);
+  font-style: bold;
+  color: white;
+}
+
+
+.vs{
+  font-size: 100px;
+  margin-right: 50px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 1위 2위 배틀 종료*/
+
+
+/* 1위~20위 전체리스트 시작*/
+.battle_list{
+    display: grid;
+    grid-template-columns: 320px 320px 320px;
+    grid-row-gap: 100px;
+    grid-column-gap: 30px;
+    justify-content: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-bottom: 300px;
+}
+
+.battle_rank h1{
+  color: #FFBB00;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: inline;
+}
+
+
+
+.battle_rank a{
+  font-family: 'Noto Sans KR', sans-serif;
+  color: black;
+  font-size: 25px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.battle_list_nameTot{
+  font-family: 'Noto Sans KR', sans-serif;
+  display: grid;
+  grid-template-columns: 40px 100px;
+  font-size: 20px;
+}
+
+
+.battle_list_nameTot a{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 20px;
+}
+#tot{
+	right: 0px;
+    grid-column-start: 6;
+    grid-column-end: 5;
+    grid-row-start: 2;
+}
+
+.battle_rank img{
+    width: 300px;
+    height: 300px;
+}
+
+.vote_percentage-bar{
+  font-family: 'Noto Sans KR', sans-serif;
+  display: grid;
+  grid-template-columns: 50px 240px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+.percentage-bar {
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-top: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: #dedede;
+  font-weight: 600;
+  font-size: .8rem;
+}
+
+.percentage-bar .percentage1 {
+  width: 72%; /* 나타내고자 하는 퍼센트 값 --> 추후*/
+  height: 10px;
+  padding: 0;
+  text-align: center;
+  background-color: #4F98FF;
+  color: #111;
+  display: none;
+}
+
+.percentage-bar .percentage2 {
+  width: 60%; /* 나타내고자 하는 퍼센트 값 --> 추후*/
+  height: 10px;
+  padding: 0;
+  text-align: center;
+  background-color: #4F98FF;
+  color: #111;
+  display: none;
+}
+
+.battle_rank button{
+  font-family: 'Noto Sans KR', sans-serif;
+  display: block;
+  position: relative;
+  width: 256px;
+  height: 48px;
+  overflow: hidden;
+  font-size: 20px;
+  line-height: 0;
+  border-radius: 20px;
+  margin-left: 15px;
+  margin-top: 10px;
+  border: none;
+  background-color: #FFBB00;
+}
+
+
+.battle_rank button:active {
+  background-color: rgb(95, 91, 91);
+  font-style: bold;
+  color: white;
+}

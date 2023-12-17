@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<div th:insert="~{common_header :: headerFragment}"></div>
+	<div class="page-single userfav_list" style="color: aliceblue;">
+		<div class="container">
+			<div class="row ipad-width2">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="user-information">
+						<div class="user-img"><img src="images/uploads/cart_logo2.png" alt="">
+							<p style="font-size: 20px;">장바구니</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<p style="font-size: 17px; text-align: right;">01.옵션선택 > <span
+							style="font-size: 23px; color: aqua;">02.장바구니 > </span> 03.주문하기 > 04.주문완료 </p>
+					<div class="topbar-filter user" style="display: flex; justify-content: flex-end;">
+						<div class="checkbox-container"
+							style="order: -1; margin-right: auto; display: flex; align-items: center;">
+							<input type="checkbox" class="checkbox" style="width: 20px; height: 20px;" id="selectAll">
+							<label for="selectAll" style="font-size: 20px; margin-left: 5px; font-weight: bold;">전체
+								선택</label>
+						</div>
+					</div>
+					<div class="flex-wrap-movielist user-fav-list"
+						style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+						<div class="text-center">
+							<p style="font-size: 24px; font-weight: bold;">장바구니에 담긴 상품이 없습니다.</p>
+							<div />
+							<p style="font-size: 18px;">원하는 상품을 장바구니에 담아보세요!</p>
+							<br />
+							<a href="product_goods_list" class="btn btn-primary"
+								style="border: 2px solid rgb(255, 255, 255); padding: 10px 20px; color: aliceblue;">쇼핑
+								계속하기</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/cart.js"></script>
+</body>
+
+</html>

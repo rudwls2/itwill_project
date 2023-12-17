@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+
+<head><!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/productTest.css">
+
+</head>
+
+<body><!--preloading-->
+	<div th:insert="~{common_header::headerFragment}"></div>
+	<!-- END | Header -->
+
+	<div class="ticketBackground" style="margin-top: 100px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- <h1>movie listing - list</h1><ul class="breadcumb"><li class="active"><a href="#">Home</a></li><li><span class="ion-ios-arrow-right"></span>movie listing</li></ul>-->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--굿즈 정보시작-->
+	<div class="page-single movie-single movie_single">
+		<div class="container">
+			<div class="row ipad-width2">
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="movie-img sticky-sb"><img th:src="${findGoods.productImage}"
+							src="images/uploads/movie-single.jpg" alt="" style="max-width: 100%">
+
+						<!--뮤비 보기 버튼-->
+						<!--<div class="movie-btn">
+							<div class="btn-transform transform-vertical red">
+								<div><a th:href="${findGoods.productMovie}" href="https://www.youtube.com/embed/o-0hcF97wy0" class="item item-1 redbtn"><i class="ion-play"></i>트레일러 보기</a>
+								</div>
+								<div><a th:href="${findTicket.productMovie}" href="https://www.youtube.com/embed/o-0hcF97wy0"
+										class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a>
+								</div>
+							</div>-->
+
+						<!--굿즈 구매하기 버튼-->
+						<div class="movie-btn">
+							<div class="btn-transform transform-vertical">
+								<div><a href="cart_main" class="item item-1 yellowbtn"><i class="ion-card"></i>굿즈 구매</a>
+								</div>
+								<div><a href="cart_main" class="item item-2 yellowbtn"><i class="ion-card"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--굿즈 정보표시-->
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<div class="movie-single-ct main-content">
+						<h1 class="bd-hd" th:text="${findGoods.productName}" style="margin-left: 30%;">Skyfall: Quantum
+							of Spectre
+						</h1>
+						<span>
+							<p> <span th:text="${findGoods.productPrice}+'원'"
+									style="margin-bottom: 15px; margin-left: 80%; font-size: 30px; color: aqua;"></span>
+							</p>
+							<!--</div>-->
+							<!--굿즈 좋아요-->
+
+							<!--굿즈 상세설명 및 댓글-->
+							<div class="movie-tabs">
+								<div class="tabs">
+									<div class="tab-content">
+										<div id="overview" class="tab active">
+											<div class="row">
+												<div class="col-md-8 col-sm-12 col-xs-12">
+													<p><span th:text="${findGoods.productContent}"></span></p>
+													<p>
+														<img th:src="${findGoods.productImage}"
+															alt="Product Artist Image">
+													</p>
+												</div>
+
+											</div>
+										</div>
+
+										<div id="reviews" class="tab review">
+											<div class="row">
+												<!--관련무비 정보[시작]-->
+												<!--<div class="rv-hd">
+												<div class="div">
+													<h3>Related Movies To</h3>
+													<h2>Skyfall: Quantum of Spectre</h2>
+												</div><a href="#" class="redbtn">댓글작성버튼/a>
+											</div>-->
+												<!--관련무비 정보[마지막]-->
+
+												<!--정렬탭[시작]-->
+												<!--정렬탭[마지막]-->
+
+												<!--댓글란[시작]-->
+												<div class="mv-user-review-item">
+
+													<!--리스트로 나열할 것들[시작]-->
+													<div class="user-infor">
+														<!--<img src="images/uploads/userava1.jpg" alt="">-->
+														<div class="comments"
+															style="margin-top: 20px; margin-bottom: 50px;">
+
+
+
+															<div th:each="ReplyList : ${ReplyList}">
+																<div class="cmt-item flex-it">
+																	<img src="images/uploads/author.png" alt="">
+
+																	<!--댓글작성자 정보 및 댓글내용[시작]-->
+																	<div class="author-infor">
+																		<p>댓글내용</p>
+																		<div class="flex-it2">
+																			<p th:text="${ReplyList.ProductReplyContent}"
+																				style="color: white;"> content </p>
+																			<!--문제발생[시작]-->
+																			<!--<h6 th:text="'작성자 : '${ReplyList.getUser().getUserName()}" style="color: white; font-size: 20px;">
+															<a href="#">Steve Perry</a></h6>							
+														<span class="time"
+														th:text="${#temporals.format(ReplyList.CreateDateTime, 'yyyy-MM-dd HH:mm')}">
+													 	27 Mar 2017</span>-->
+																			<!--문제발생[시작]-->
+																		</div>
+																	</div>
+																	<!--댓글작성자 정보 및 댓글내용[마지막]-->
+																</div>
+															</div>
+														</div>
+
+													</div>
+													<!--리스트로 나열할 것들 [마지막]-->
+
+
+													<!--댓글 수정 및 삭제 폼[마지막]-->
+
+												</div>
+												<!--댓글란[마지막]-->
+
+											</div>
+											<!--댓글보기 내용[마지막]-->
+
+										</div>
+										<!--댓글보기 전체[마지막]-->
+
+										<!--아티스트 보기-->
+ 								<div
+									style="display: flex; align-items: center; font-size: 15px;">
+									<input type="hidden" id="productNo" th:value="${findGoods.productQty}">
+									<input type="hidden" class='test'
+										th:data-productNo='${findGoods.productQty}'
+										th:value='${findGoods.productQty}'>
+									<button class="quantity-control"
+										onclick="changeQuantity(-1, this)"
+										style="width: 35px; height: 35px; background-color: rgb(2, 15, 25); font-size: 20px; line-height: 25px; border: solid 1px white;">-</button>
+									<input id="productQty" type="text"
+										style="width: 50px; height: 35px; background-color: rgb(2, 15, 25); text-align: center; font-size: 15px; border: solid 1px white; color: white;"
+										th:value="${findGoods.productQty}" >
+									<button class="quantity-control"
+										onclick="changeQuantity(1, this)"
+										style="width: 35px; height: 35px; background-color: rgb(2, 15, 25); font-size: 20px; border: solid 1px white; line-height: 25px;">+</button>
+								</div> 
+
+										<div id="media" class="tab">
+											<div class="row">
+												<div class="rv-hd">
+													<div>
+														<h3>아티스트 : <span th:text="${findGoods.productArtist}"></span>
+														</h3>
+														<h2>공연제목 : <span th:text="${findGoods.productName}"></span></h2>
+													</div>
+												</div>
+												<div class="title-hd-sm">
+													<h4>트레일러<span></span></h4>
+												</div>
+												<div class="mvsingle-item media-item">
+													<div class="vd-item">
+														<div class="vd-it"><img class="vd-img"
+																src="images/uploads/vd-item1.jpg" alt=""><a
+																class="fancybox-media hvr-grow"
+																href="https://www.youtube.com/embed/o-0hcF97wy0"><img
+																	src="images/uploads/play-vd.png" alt=""></a></div>
+														<div class="vd-infor">
+															<h6><a href="${findGoods.productMovie}"><span
+																		th:text="${findGoods.productName}"></span></a>
+															</h6>
+															<p class="time">1: 31</p>
+														</div>
+													</div>
+
+													<!--<div class="vd-item">
+													<div class="vd-it"><img class="vd-img"
+															src="images/uploads/vd-item2.jpg" alt=""><a
+															class="fancybox-media hvr-grow"
+															href="https://www.youtube.com/embed/o-0hcF97wy0"><img
+																src="images/uploads/play-vd.png" alt=""></a></div>
+													<div class="vd-infor">
+														<h6><a href="#">Featurette: “Avengers Re-Assembled</a></h6>
+														<p class="time">1: 03</p>
+													</div>
+												</div>
+												<div class="vd-item">
+													<div class="vd-it"><img class="vd-img"
+															src="images/uploads/vd-item3.jpg" alt=""><a
+															class="fancybox-media hvr-grow"
+															href="https://www.youtube.com/embed/o-0hcF97wy0"><img
+																src="images/uploads/play-vd.png" alt=""></a></div>
+													<div class="vd-infor">
+														<h6><a href="#">Interview: Robert Downey Jr</a></h6>
+														<p class="time">3:27</p>
+													</div>
+												</div>
+												<div class="vd-item">
+													<div class="vd-it"><img class="vd-img"
+															src="images/uploads/vd-item4.jpg" alt=""><a
+															class="fancybox-media hvr-grow"
+															href="https://www.youtube.com/embed/o-0hcF97wy0"><img
+																src="images/uploads/play-vd.png" alt=""></a></div>
+													<div class="vd-infor">
+														<h6><a href="#">Interview: Scarlett Johansson</a></h6>
+														<p class="time">3:27</p>
+													</div>
+												</div>
+												<div class="vd-item">
+													<div class="vd-it"><img class="vd-img"
+															src="images/uploads/vd-item1.jpg" alt=""><a
+															class="fancybox-media hvr-grow"
+															href="https://www.youtube.com/embed/o-0hcF97wy0"><img
+																src="images/uploads/play-vd.png" alt=""></a></div>
+													<div class="vd-infor">
+														<h6><a href="#">Featurette: Meet Quicksilver & The Scarlet
+																Witch</a></h6>
+														<p class="time">1: 31</p>
+													</div>
+												</div>
+												<div class="vd-item">
+													<div class="vd-it"><img class="vd-img"
+															src="images/uploads/vd-item2.jpg" alt=""><a
+															class="fancybox-media hvr-grow"
+															href="https://www.youtube.com/embed/o-0hcF97wy0"><img
+																src="images/uploads/play-vd.png" alt=""></a></div>
+													<div class="vd-infor">
+														<h6><a href="#">Interview: Director Joss Whedon</a></h6>
+														<p class="time">1: 03</p>
+													</div>
+												</div>
+												<div class="vd-item">
+													<div class="vd-it"><img class="vd-img"
+															src="images/uploads/vd-item3.jpg" alt=""><a
+															class="fancybox-media hvr-grow"
+															href="https://www.youtube.com/embed/o-0hcF97wy0"><img
+																src="images/uploads/play-vd.png" alt=""></a></div>
+													<div class="vd-infor">
+														<h6><a href="#">Interview: Mark Ruffalo</a></h6>
+														<p class="time">3:27</p>
+													</div>
+												</div>
+												<div class="vd-item">
+													<div class="vd-it"><img class="vd-img"
+															src="images/uploads/vd-item4.jpg" alt=""><a
+															class="fancybox-media hvr-grow"
+															href="https://www.youtube.com/embed/o-0hcF97wy0"><img
+																src="images/uploads/play-vd.png" alt=""></a></div>
+													<div class="vd-infor">
+														<h6><a href="#">Official Trailer #2</a></h6>
+														<p class="time">3:27</p>
+													</div>
+												</div>-->
+												</div>
+												<!--<div class="title-hd-sm">
+												<h4>Photos <span>(21)</span></h4>
+											</div>-->
+												<!--											<div class="mvsingle-item"><a class="img-lightbox"
+													data-fancybox-group="gallery" href="images/uploads/image11.jpg"><img
+														src="images/uploads/image1.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image21.jpg"><img
+														src="images/uploads/image2.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image31.jpg"><img
+														src="images/uploads/image3.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image41.jpg"><img
+														src="images/uploads/image4.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image51.jpg"><img
+														src="images/uploads/image5.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image61.jpg"><img
+														src="images/uploads/image6.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image71.jpg"><img
+														src="images/uploads/image7.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image81.jpg"><img
+														src="images/uploads/image8.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image91.jpg"><img
+														src="images/uploads/image9.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image101.jpg"><img
+														src="images/uploads/image10.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image111.jpg"><img
+														src="images/uploads/image1-1.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image121.jpg"><img
+														src="images/uploads/image12.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image131.jpg"><img
+														src="images/uploads/image13.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image141.jpg"><img
+														src="images/uploads/image14.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image151.jpg"><img
+														src="images/uploads/image15.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image161.jpg"><img
+														src="images/uploads/image16.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image171.jpg"><img
+														src="images/uploads/image17.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image181.jpg"><img
+														src="images/uploads/image18.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image191.jpg"><img
+														src="images/uploads/image19.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image201.jpg"><img
+														src="images/uploads/image20.jpg" alt=""></a><a
+													class="img-lightbox" data-fancybox-group="gallery"
+													href="images/uploads/image211.jpg"><img
+														src="images/uploads/image2-1.jpg" alt=""></a></div>
+										</div>-->
+											</div>
+											<div id="moviesrelated" class="tab">
+												<div class="row">
+													<h3>Related Movies To</h3>
+													<h2>Skyfall: Quantum of Spectre</h2>
+													<div class="topbar-filter">
+														<p>Found <span>12 movies</span>in total</p><label>Sort
+															by:</label><select>
+															<option value="popularity">Popularity Descending</option>
+															<option value="popularity">Popularity Ascending</option>
+															<option value="rating">Rating Descending</option>
+															<option value="rating">Rating Ascending</option>
+															<option value="date">Release date Descending</option>
+															<option value="date">Release date Ascending</option>
+														</select>
+													</div>
+													<div class="movie-item-style-2"><img src="images/uploads/mv1.jpg"
+															alt="">
+														<div class="mv-item-infor">
+															<h6><a href="#">oblivion <span>(2012)</span></a></h6>
+															<p class="rate"><i
+																	class="ion-android-star"></i><span>8.1</span>/10
+															</p>
+															<p class="describe">Earth's mightiest heroes must come
+																together and
+																learn to fight as a team if they are to stop the
+																mischievous
+																Loki and his alien army from enslaving humanity...</p>
+															<p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13
+																</span> .
+																<span>Release: 1 May 2015</span>
+															</p>
+															<p>Director: <a href="#">Joss Whedon</a></p>
+															<p>Stars: <a href="#">Robert Downey Jr.,</a><a
+																	href="#">Chris
+																	Evans,</a><a href="#">Chris Hemsworth</a></p>
+														</div>
+													</div>
+													<div class="movie-item-style-2"><img src="images/uploads/mv2.jpg"
+															alt="">
+														<div class="mv-item-infor">
+															<h6><a href="#">into the wild <span>(2014)</span></a></h6>
+															<p class="rate"><i
+																	class="ion-android-star"></i><span>7.8</span>/10
+															</p>
+															<p class="describe">As Steve Rogers struggles to embrace his
+																role in
+																the modern world, he teams up with a fellow Avenger and
+																S.H.I.E.L.D agent, Black Widow, to battle a new
+																threat...</p>
+															<p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13
+																</span> .
+																<span>Release: 1 May 2015</span>
+															</p>
+															<p>Director: <a href="#">Anthony Russo,</a><a href="#">Joe
+																	Russo</a>
+															</p>
+															<p>Stars: <a href="#">Chris Evans,</a><a href="#">Samuel L.
+																	Jackson,</a><a href="#">Scarlett Johansson</a></p>
+														</div>
+													</div>
+													<div class="movie-item-style-2"><img src="images/uploads/mv3.jpg"
+															alt="">
+														<div class="mv-item-infor">
+															<h6><a href="#">blade runner <span>(2015)</span></a></h6>
+															<p class="rate"><i
+																	class="ion-android-star"></i><span>7.3</span>/10
+															</p>
+															<p class="describe">Armed with a super-suit with the
+																astonishing
+																ability to shrink in scale but increase in strength, cat
+																burglar
+																Scott Lang must embrace his inner hero and help...</p>
+															<p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13
+																</span> .
+																<span>Release: 1 May 2015</span>
+															</p>
+															<p>Director: <a href="#">Peyton Reed</a></p>
+															<p>Stars: <a href="#">Paul Rudd,</a><a href="#">Michael
+																	Douglas</a>
+															</p>
+														</div>
+													</div>
+													<div class="movie-item-style-2"><img src="images/uploads/mv4.jpg"
+															alt="">
+														<div class="mv-item-infor">
+															<h6><a href="#">Mulholland pride<span>(2013) </span></a>
+															</h6>
+															<p class="rate"><i
+																	class="ion-android-star"></i><span>7.2</span>/10
+															</p>
+															<p class="describe">When Tony Stark's world is torn apart by
+																a
+																formidable terrorist called the Mandarin, he starts an
+																odyssey
+																of rebuilding and retribution.</p>
+															<p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13
+																</span> .
+																<span>Release: 1 May 2015</span>
+															</p>
+															<p>Director: <a href="#">Shane Black</a></p>
+															<p>Stars: <a href="#">Robert Downey Jr.,</a><a href="#">Guy
+																	Pearce,</a><a href="#">Don Cheadle</a></p>
+														</div>
+													</div>
+													<div class="movie-item-style-2"><img src="images/uploads/mv5.jpg"
+															alt="">
+														<div class="mv-item-infor">
+															<h6><a href="#">skyfall: evil of boss<span>(2013)
+																	</span></a></h6>
+															<p class="rate"><i
+																	class="ion-android-star"></i><span>7.0</span>/10
+															</p>
+															<p class="describe">When Tony Stark's world is torn apart by
+																a
+																formidable terrorist called the Mandarin, he starts an
+																odyssey
+																of rebuilding and retribution.</p>
+															<p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13
+																</span> .
+																<span>Release: 1 May 2015</span>
+															</p>
+															<p>Director: <a href="#">Alan Taylor</a></p>
+															<p>Stars: <a href="#">Chris Hemsworth,</a><a
+																	href="#">Natalie
+																	Portman,</a><a href="#">Tom Hiddleston</a></p>
+														</div>
+													</div>
+													<div class="topbar-filter"><label>Movies per page:</label><select>
+															<option value="range">5 Movies</option>
+															<option value="saab">10 Movies</option>
+														</select>
+														<div class="pagination2"><span>Page 1 of 2:</span><a
+																class="active" href="#">1</a><a href="#">2</a><a
+																href="#"><i class="ion-arrow-right-b"></i></a></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- footer section-->
+		<div th:insert="~{common_footer :: footerFragment}"></div>
+		<!-- end of footer section-->
+
+</body>
+<script>
+	function create_reply() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const productNo = urlParams.get("productNo");
+
+		var commentContent = $("#comment_content").val()
+		console.log(commentContent);
+
+		const commentData = {
+			"productReplytTitle": "댓글타이틀",
+			"productReplyContent": commentContent,
+			"productNo": productNo,
+			"userId": "myr1109" //세션처리 아이디넣으면 자동으로 이름들어옴
+		}
+		console.log(commentData);
+		fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/product_reply_create/${productNo}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(commentData)
+		})
+			.then(response => {
+				if (response.status === 201) {
+					alert('댓글 등록되었습니다.');
+					//	location.reload(); // 현재 페이지를 새로 고침
+					window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/product_goods_detail?productNo=" + productNo;
+				} else {
+					alert('댓글 등록에 실패했습니다.');
+					alert('에러 발생: ' + error);
+
+				}
+			})
+			.catch(error => {
+				alert('에러 발생: ' + error);
+			});
+
+
+	}
+
+	function deleteForms() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const productNo = urlParams.get("productNo");
+
+		fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/delete/${productNo}`, {
+			method: "DELETE",
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					alert("댓글이 삭제되었습니다.");
+					/*alert("메인으로 이동합니다.");*/
+					window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/product_goods_detail?productNo=" + productNo;
+				} else {
+					alert("게시글 삭제에 실패했습니다.");
+				}
+			})
+			.catch((error) => {
+				alert("에러발생.")
+				console.error("에러:", error);
+			})
+			.finally(() => {
+				// 비활성화된 버튼을 활성화
+				deleteButton.disabled = false;
+			});
+	}
+	//수정하기폼으로 이동
+	function update_reply_form() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const productNo = urlParams.get("productNo");
+
+		window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/product_goods_detail?productNo=" + productNo;
+	}
+	
+	
+	//product 수량 설정
+	function changeQuantity(amount, button) {
+	    // 입력 필드에서 현재 수량 가져오기
+	    const inputElement = button.parentNode.querySelector('#productQty');
+	    let currentQty = parseInt(inputElement.value);
+
+	    // 버튼 클릭에 따라 수량 업데이트
+	    currentQty += amount;
+
+	    // 수량 최소 1이상
+	    currentQty = Math.max(currentQty, 0);
+
+	    // 새로운 수량으로 입력 필드 업데이트
+	    inputElement.value = currentQty;
+
+	    // 숨겨진 입력 필드에서 제품 번호 가져오기
+	    const productNo = button.parentNode.querySelector('#productNo').value;
+
+	    // AJAX를 사용하여 서버에 업데이트된 수량 보내기
+	    fetch("/product_goods_detail/qty", {
+	        method: "POST",
+	        headers: {
+	            "Content-Type": "application/json",
+	        },
+	        body: JSON.stringify({
+	            productNo: productNo,
+	            productQty: currentQty,
+	        }),
+	    })
+	    .then(response => response.json())
+	    .then(data => {
+	        console.log("업데이트된 수량:", data.productQty);
+	    })
+	    .catch(error => {
+	        console.error("수량 업데이트 중 오류:", error);
+	    });
+	}
+
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/product.js"></script>
+
+</html>

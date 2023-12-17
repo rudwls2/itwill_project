@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body><!--preloading-->
+	<div th:insert="~{common_header :: headerFragment}">
+	</div>
+	<div class="page-single userfav_list" style="color: aliceblue;">
+		<div class="container">
+			<div class="row ipad-width2">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="user-information">
+						<div class="user-img"><img src="images/uploads/cart_logo2.png" alt="">
+							<p style="font-size: 20px;">장바구니</p>
+							<br>
+						</div>
+
+						<!--						<div class="user-fav">
+							<p>Account Details</p>
+							<ul>
+								<li><a href="userprofile.html">Profile</a></li>
+								<li class="active"><a href="userfavoritelist.html">Favorite movies</a></li>
+								<li><a href="userrate.html">Rated movies</a></li>
+							</ul>
+						</div>-->
+
+					</div>
+				</div>
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<p style="font-size: 17px; text-align: right;">01.옵션선택 > <span
+							style="font-size: 23px; color: aqua;">02.장바구니 > </span> 03.주문하기 > 04.주문완료 </p>
+<div class="topbar-filter user" style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="checkbox-container" style="display: flex; align-items: center;">
+        <input type="checkbox" class="checkbox1" style="width: 20px; height: 20px; vertical-align: middle;" id="selectAll">
+        <label for="selectAll" style="font-size: 20px; margin-left: 5px; font-weight: bold; vertical-align: middle;">전체 선택</label>
+    </div>
+    <a href="#" class="delete-all-btn" style="border: 1px solid #ccc; padding: 5px 10px; border-radius: 5px; color: white;">선택 삭제</a>
+</div>
+
+
+					<div class="flex-wrap-movielist user-fav-list">
+
+						<div class="flex-wrap-movielist user-fav-list">
+
+							<div th:each="cartItem : ${cartItems}" class="movie-item-style-2" >
+								<div style="margin-right: 5%;" class="checkbox-container" >
+									<input type="checkbox" class="checkbox2" style="width: 20px; height: 20px;" th:data-cart-Item-id="${cartItem.cartItemId}">
+									<span th:id="cartItem"  th:text="${cartItem.cartItemId}"></span>
+								</div>
+								<img src="images/uploads/cart_1.jpg" alt="" style="width: 181px; height: 278px;">
+								<div th:each="product : ${products}" th:if="${product.productNo == cartItem.productId}"
+									class="mv-item-infor">
+									<ul>
+										<span th:text="${product.productName}"></span>
+										<br />
+										<br />
+								<h6 style="font-size: 15px;">
+								    수량: 
+								    <select id="cartItemQty" style="width: 80px;" onchange="updateCartItemQuantity(this)">
+								        <th:block th:each="i : ${#numbers.sequence(1,10)}">
+								            <option th:value="${i}" th:selected="${i eq cartItem.cartItemQty}">[[${i}]]</option>
+								        </th:block>
+								    </select>
+								</h6>
+
+										</li>
+										<li class="rate">
+										</li>
+										<li class="describe">상품상세내용테스트상품상세내용테스트상품상세내용테스트상품상세내용테스트상품상세내용테스트상품상세내용테스트</li>
+
+										</li>
+										<li class="run-time" style="font-size: 20px">
+											상품가격 : <span th:text="${product.productPrice} + 원"></span>배송비 : 0원 <span style="color: orange;">주문금액
+												:</span> 
+												<span th:text="${product.productPrice * cartItem.cartItemQty +'원'}" style="color: orange;"></span>
+												<a href="#" style="border: 1px solid #ccc; padding: 5px 10px; border-radius: 5px; color: white;" >주문하기</a>
+										</li>
+										<div
+											style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: rgb(251, 185, 136); color: black; text-align: right; padding: 10px 10px;">
+											<span id="cartTotPrice" style="margin-right: 10px; font-size: 18px;">
+												<span th:text="'총 주문금액 : ' + ${cart.cartTotPrice} + '원' "></span>
+											</span>
+											<button
+												style="background-color: #fff; color:black; border: none; padding: 10px 20px; font-size: 18px; margin-right: 10%; width: 15%; border-radius: 10px;">주문하기</button>
+										</div>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- 스크롤 이벤트를 감지하여 버튼을 항상 보이게 하는 JavaScript 코드 -->
+						<!--					<script>
+							window.addEventListener('scroll', function () {
+								var button = document.querySelector('.fixed-button');
+								button.style.display = 'block';
+							});
+						</script>-->
+
+
+
+						<!--						<div class="cart-items">
+							<div class="mv-item-infor">
+								<div th:each="cartItem : ${cartItems}"> <img src="images/uploads/cart_1.jpg" alt="">
+
+									<ul>
+										<span th:text="${cartItem.cartItemId}"></span>
+								</div>
+								</ul>
+							</div>
+						</div>-->
+
+					</div>
+	<!-- 				<div class="topbar-filter"><label>Movies per page:</label><select>
+							<option value="range">5 Movies</option>
+							<option value="saab">10 Movies</option>
+						</select>
+						<div class="pagination2"><span>Page 1 of 2:</span><a class="active" href="#">1</a><a
+								href="#">2</a><a href="#">3</a><a href="#">...</a><a href="#">78</a><a href="#">79</a><a
+								href="#"><i class="ion-arrow-right-b"></i></a></div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div><!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div>
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/cart.js"></script>
+</body>
+
+</html>

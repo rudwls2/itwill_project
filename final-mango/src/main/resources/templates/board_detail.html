@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#">
+	<!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+	<!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+	<div th:insert="~{common_header :: headerFragment}"></div>
+
+
+	<div class="page-single">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="blog-detail-ct">
+						<div class="flex-it share-tag"></div>
+						<h1 th:text="${board.boardTitle}">title</h1>
+						<h4>작성자 : <span th:text="${board.getUser().getUserId()}">id</span></h4>
+
+						</br>
+						<h4 th:text="${board.boardCategory.boardCategoryName + ' - ' + board.boardType.boardTypeTitle}">
+						</h4>
+
+						</br>
+
+						<p>작성일 : <span th:text="${#temporals.format(board.createdTime, 'yyyy-MM-dd HH:mm')}"> </span>
+						</p>
+
+						<div id="boardId" th:text="${board.boardId}" style="display: none;">게시글 ID</div>
+
+						<pre th:utext="${board.boardContent}"
+							style="border: 2px solid rgb(2, 15, 25); line-height: 20px; margin-top: 50px; color: rgb(255, 255, 255); height: 700px ; width: 1000px;"></pre>
+
+
+
+						<div class="flex-it share-tag"></div>
+
+						<!--userId가 admin일때 보이기 -->
+						<div th:if="${session == null or (userIdString != null and userIdString == 'admin')}">
+							<div class="comment-form">
+								<div class="dropdown-container">
+									<div class="row">
+										<div class="col-md-6">
+											<form action="">
+												<input class="submit" type="button" value="수정하기"
+													onclick="update_edit_form()" style="margin-left: 250px;">
+											</form>
+										</div>
+										<div class="col-md-6">
+											<form id="deleteForm">
+												<input class="submit" value="삭제하기" type="button" onclick="deleteForms()"
+													style="margin-left: 10%;">
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-sm-12 col-xs-12">
+		<div class="sidebar">
+			<div class="sb-cate sb-it"></div>
+			<div class="sb-recentpost sb-it"></div>
+			<div class="sb-tags sb-it"></div>
+		</div>
+	</div>
+
+
+	<div th:insert="~{common_footer :: footerFragment}"></div>
+</body>
+
+<script>
+
+	function deleteForms() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const boardId = urlParams.get("boardId");
+		const boardIdInt = parseInt(boardId, 10);
+
+		fetch(`/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_delete/${boardIdInt}`, {
+			method: "DELETE",
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					alert("게시글이 삭제되었습니다.");
+					alert("메인으로 이동합니다.");
+					window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_notification";
+				} else {
+					alert("게시글 삭제에 실패했습니다.");
+				}
+			})
+			.catch((error) => {
+				alert("에러발생.")
+				console.error("에러:", error);
+			})
+			.finally(() => {
+				// 비활성화된 버튼을 활성화
+				deleteButton.disabled = false;
+			});
+
+	}
+	//수정하기폼으로 이동
+	function update_edit_form() {
+		const urlParams = new URLSearchParams(window.location.search);
+		const boardId = urlParams.get("boardId");
+		const boardIdInt = parseInt(boardId, 10);
+
+		window.location.href = "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/board_detail_edit?boardId=" + boardIdInt;
+	}
+
+
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
+
+</html>

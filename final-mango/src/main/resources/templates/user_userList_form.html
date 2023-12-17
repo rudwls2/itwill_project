@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en" class="no-js">
+
+<head><!-- Basic need -->
+	<title>Open Pediatrics</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="">
+	<link rel="profile" href="#"><!--Google Font-->
+	<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+	<!-- Mobile specific meta -->
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no"><!-- CSS files -->
+	<link rel="stylesheet" href="css/plugins.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!--Bootstrap CSS
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   Bootstrap JS and Popper.js
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+
+</head>
+
+<body>
+	<!-- BEGIN | Header -->
+	<div th:insert="~{common_header :: headerFragment}"></div>
+	<!-- END | Header -->
+	<div class="page-single">
+		<div class="container">
+			<div class="row ipad-width">
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="user-information">
+						<div class="user-img"><a href="#"><img src="images/uploads/user-img.png" alt=""><br></a></div>
+						<div class="user-fav">
+							<p>Details</p>
+							<ul>
+								<li><a href="user_info_form">내정보</a></li>
+								<li><a href="user_modify_form">회원정보수정</a></li>
+								<!--<li><a href="cart_main" id="cartForm">나의 장바구니</a></li>
+								<li><a href="order_history" id="orderForm">나의 주문내역</a></li>-->
+								<li class="active"><a href="user_userList_form" id="UserListForm">회원 목록</a></li>
+								<li><a href="user_order_info_form" id="OrderListForm">주문 목록</a></li>
+								<li><a href="user_inq_info_form" id="InquiryListForm">문의 목록</a></li>
+								<!--<li><a href="#" data-toggle="modal" data-target="#withdrawalModal"
+                              id="userDelete">회원탈퇴</a></li>-->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- 모달 창 -->
+
+				<!-- 유저 테이블 시작 -->
+				<div class="content" style="color: white; padding: 20px; display: grid;">
+					<h1 style="margin-left: 400px; margin-bottom: 100px; margin-top: 20px; width: 200px;">회원 목록</h1>
+					<button id="loadUserListButton" style="color: black; width: 20%;">회원리스트 불러오기</button>
+					<table style="width: 130%;">
+						<tr style="font-size: 18px; color:  #FFBB00;">
+							<td style="width: 43px;"><!--<input type="checkbox">--></td>
+							<td style="width: 10%;">아이디</td>
+							<td style="width: 15%;">비밀번호</td>
+							<td style="width: 8%;">이름</td>
+							<td style="width: 25%; text-align: center;">주소</td>
+							<td style="width: 15%;">이메일</td>
+							<td style="width: 15%;">주민번호</td>
+							<td style="width: 15%;">전화번호</td>
+							<td style="width: 8%;">성별</td>
+							<td style="width: 10%;">멤버쉽</td>
+						</tr>
+
+						<tr th:each="user : ${users}">
+							<!--<td><input type="checkbox" /></td>-->
+							<td th:text="${user.userId}">아이디</td>
+							<td th:text="${user.userPw}">비밀번호</td>
+							<td th:text="${user.userName}">이름</td>
+							<td th:text="${user.userAddress}">주소</td>
+							<td th:text="${user.userEmail}">이메일</td>
+							<td th:text="${user.userJumin}">주민번호</td>
+							<td th:text="${user.userPhone}">전화번호</td>
+							<td th:text="${user.userGender}">성별</td>
+							<td th:text="${user.memberShip}">멤버쉽</td>
+						</tr>
+					</table>
+
+					<!--<div style="display: flex; gap: 5%;">
+                  <button id="user_deleteButton"
+                     style="margin-top: 20px; background-color: white;  color: black; width: 100px;">삭제</button>
+                  <button id="user_updateButton"
+                     style="margin-top: 20px; background-color: white; color: black; width: 100px;">수정</button>
+               </div>-->
+				</div>
+				<!-- 유저 테이블 종료 -->
+
+
+			</div>
+
+		</div>
+	</div>
+	</div>
+	</div>
+	</div><!-- footer section-->
+	<div th:insert="~{common_footer :: footerFragment}">
+	</div><!-- end of footer section-->
+
+	<!--<script>
+		// 페이지 로드 시 실행되는 함수
+		window.onload = function () {
+			// admin 계정으로 로그인한 경우
+			if (isAdminUser()) {
+				hideCartForm(); // 나의 장바구니 폼을 숨김
+
+				hideOrderForm(); // 나의 주문내역 폼을 숨김
+
+				showUserListForm(); // 회원 목록 폼을 보임
+
+				showOrderListForm(); // 주문 목록 폼을 보임
+
+				showInquiryListForm(); //문의 목록 폼을 보임
+
+			}
+		};
+
+		// admin 계정 여부를 확인하는 함수
+		function isAdminUser() {
+			var userId = document.getElementById("userId").value;
+			return userId === 'admin';
+		}
+
+		// 나의 장바구니 폼을 숨기는 함수
+		function hideCartForm() {
+			var cartForm = document.getElementById("cartForm");
+			if (cartForm) {
+				cartForm.style.display = 'none';
+			}
+		}
+
+		// 나의 주문내역 폼을 숨기는 함수
+		function hideOrderForm() {
+			var orderForm = document.getElementById("orderForm");
+			if (orderForm) {
+				orderForm.style.display = 'none';
+			}
+		}
+
+		// 회원 목록 폼을 보이게 하는 함수
+		function showUserListForm() {
+			var UserListForm = document.getElementById("UserListForm");
+			if (UserListForm) {
+				UserListForm.style.display = 'block';
+			}
+		}
+
+		// 회원 목록 폼을 숨기는 함수
+		function hideUserListForm() {
+			var UserListForm = document.getElementById("UserListForm");
+			if (UserListForm) {
+				UserListForm.style.display = 'none';
+			}
+		}
+
+		// 주문 목록 폼을 보이게 하는 함수
+		function showOrderListForm() {
+			var OrderListForm = document.getElementById("OrderListForm");
+			if (OrderListForm) {
+				OrderListForm.style.display = 'block';
+			}
+		}
+
+		// 문의 목록 폼을 보이게 하는 함수
+		function showInquiryListForm() {
+			var InquiryListForm = document.getElementById("InquiryListForm");
+			if (InquiryListForm) {
+				InquiryListForm.style.display = 'block';
+			}
+		}
+
+	</script>-->
+
+	<script>
+		function updateTable(data) {
+			// 이 부분에서 테이블을 갱신하는 로직을 추가하세요.
+			// 예를 들어, 테이블의 tbody를 찾아서 데이터를 반영할 수 있습니다.
+			var tbody = $("table tbody");
+
+			// 각 사용자에 대한 데이터를 테이블에 추가
+			for (var i = 0; i < data.length; i++) {
+				var user = data[i];
+				var row = $("<tr></tr>");
+
+				// 각 필드에 대한 데이터 표시
+				row.append("<td></td>");
+				row.append("<td>" + user.userId + "</td>");
+				row.append("<td>" + user.userPw + "</td>");
+				row.append("<td>" + user.userName + "</td>");
+				row.append("<td>" + user.userAddress + "</td>");
+				row.append("<td>" + user.userEmail + "</td>");
+				row.append("<td>" + user.userJumin + "</td>");
+				row.append("<td>" + user.userPhone + "</td>");
+				row.append("<td>" + user.userGender + "</td>");
+				//row.append("<td>" + user.memberShip + "</td>");
+
+				// 멤버쉽 값에 따라 'O' 또는 'X'를 표시
+				var membershipText = user.memberShip ? 'O' : 'X';
+				row.append("<td>" + membershipText + "</td>");
+
+				// 나머지 필드도 유사하게 추가
+				tbody.append(row);
+			}
+		}
+
+		$(document).ready(function () {
+			$("#loadUserListButton").click(function () {
+				// 버튼 클릭 시 서버에 요청을 보냅니다.
+				$.ajax({
+					type: "GET",
+					url: "/2023-05-JAVA-DEVELOPER-final-project-team1-mango/user/list",
+					success: function (data) {
+						console.log(data);
+						updateTable(data); // 테이블 갱신 함수 호출
+					},
+					error: function (error) {
+						// 요청이 실패했을 때 실행되는 코드
+						console.error("Error loading user list:", error);
+					}
+				});
+			});
+		});
+	</script>
+
+
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/plugins2.js"></script>
+	<script src="js/custom.js"></script>
+	<!--<script src="js/user.js"></script>-->
+
+</body>
+
+</html>
