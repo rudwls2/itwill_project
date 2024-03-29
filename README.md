@@ -10,7 +10,7 @@
 ## 개발기간 및 인원
 ![업무분담](https://github.com/CHAERINYOU/Portfolio/assets/133833066/cd805d47-d815-47fb-9943-bd5733b591c1)
 * 2023.10.13. ~ 2023.11.15.
-* 담당파트: 장바구니(Cart)
+* 담당파트: 주문(Order)
 <br/><br/><br/>
 
 ## 개발환경 및 주요기술
