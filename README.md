@@ -67,13 +67,16 @@
 #### 장바구니 /주문  페이지
 ![image](https://github.com/WooHanYeong/teamProject-mango/assets/133833197/fa750640-06ee-4274-9b2c-8e99286dfba9)
 
-장바구니 , 주문페이지 입니다.굿즈 등의 상품을 장바구니에 넣은 페이지, 주문 후의 주문내역을 확인할 수 있는 페이지 입니다.  
+장바구니, 굿즈 등의 상품을 장바구니에 넣은 페이지입니다. 
 ![image](https://github.com/WooHanYeong/teamProject-mango/assets/133833197/43f5075b-dd78-4e9f-8561-b9e3ac39fc42)
+<br>
 
 주문하기, 멤버쉽과 티켓을 결제할 수 있습니다.
+<br>
 <p><img src="https://github.com/rudwls2/rudwls2/assets/128288374/e4d82ea7-5724-4fab-b305-0ef1d4098518"></p>
 
 주문내역, 주문내역 확인이 가능하고 정렬 또는 삭제가 가능합니다.
+<br>
 <p><img src="https://github.com/rudwls2/rudwls2/assets/128288374/f508728f-37c2-46da-8608-a3a7d2da02b8"></p>
 <br>
 <br/><br/><br/>
