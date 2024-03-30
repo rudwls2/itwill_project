@@ -75,11 +75,9 @@
 #### 주문 페이지
 주문하기, 멤버십과 티켓을 결제할 수 있습니다.
 <br>
-<br>
 <p><img src="https://github.com/rudwls2/rudwls2/assets/128288374/e4d82ea7-5724-4fab-b305-0ef1d4098518"></p>
 
 주문내역, 주문내역 확인이 가능하고 정렬 또는 삭제가 가능합니다.
-<br>
 <br>
 <p><img src="https://github.com/rudwls2/rudwls2/assets/128288374/f508728f-37c2-46da-8608-a3a7d2da02b8"></p>
 <br>
