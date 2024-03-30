@@ -27,7 +27,7 @@
 * 로그인, 회원가입, 상품검색, 상품주문, 장바구니...등
 <br/><br/><br/>
 
-#### 메인페이지
+#### 메인 페이지
 
 ![메인페이지](https://github.com/2023-05-JAVA-DEVELOPER-143/web-project-team2-bbbb/assets/133833066/322e25ca-2f1a-4f00-8142-d7dfce62e1c8)
 *  MANGO 메인화면 페이지입니다.
@@ -42,7 +42,7 @@
 * 로그인 항목에서 회원가입, 아이디 찾기, 비밀번호 찾기 등의 메뉴를 확인 할 수 있습니다.
 <br/><br/><br/>
 
-#### 회원 가입 페이지
+#### 회원가입 페이지
 ![회원가입](https://github.com/2023-05-JAVA-DEVELOPER-143/web-project-team2-bbbb/assets/133833066/5ad72c63-46fb-4985-97d7-255d7eee0d9c)
 * 회원가입 항목에서 회원가입을 할 수 있습니다.<br/><br/><br/>
 
@@ -58,19 +58,21 @@
 굿즈 리스트 페이지입니다. 검색기능이 존재합니다.
 ![image](https://github.com/WooHanYeong/teamProject-mango/assets/133833197/c1ca0f47-cb00-4b17-8cab-09d517f623ef)
 
-#### 투표페이지
+#### 투표 페이지
 ![image](https://github.com/WooHanYeong/teamProject-mango/assets/133833197/686c0f63-1bec-4b6e-932d-353f0f90d6a9)
 * MANGO 아티스트 투표 페이지이며, 회원이 응원하는 아티스트에 대해 투표를 할 수 있습니다.
 * 설정된 투표 시간이 종료되면, 투표는 마감이 됩니다. <br/><br/><br/>
 
 
-#### 장바구니 /주문  페이지
+#### 장바구니 페이지
 ![image](https://github.com/WooHanYeong/teamProject-mango/assets/133833197/fa750640-06ee-4274-9b2c-8e99286dfba9)
 
 장바구니, 굿즈 등의 상품을 장바구니에 넣은 페이지입니다. 
 ![image](https://github.com/WooHanYeong/teamProject-mango/assets/133833197/43f5075b-dd78-4e9f-8561-b9e3ac39fc42)
 <br>
 
+
+#### 주문문 페이지
 주문하기, 멤버쉽과 티켓을 결제할 수 있습니다.
 <br>
 <p><img src="https://github.com/rudwls2/rudwls2/assets/128288374/e4d82ea7-5724-4fab-b305-0ef1d4098518"></p>
